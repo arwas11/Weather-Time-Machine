@@ -1,1 +1,17 @@
-<h1>{{title}}</h1>
+<header class="header">
+  <h1>{{ title }}</h1>
+  <app-header></app-header>
+</header>
+<main class="main">
+  <div class="weather-info">
+    <div class="left-current">
+      <app-current-weather ></app-current-weather>
+    </div>
+    <div class="right-past">
+      <app-past-weather ></app-past-weather>
+    </div>
+  </div>
+</main>
+<footer class="footer">
+    <app-footer></app-footer>
+</footer>

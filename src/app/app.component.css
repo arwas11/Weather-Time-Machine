@@ -1,0 +1,21 @@
+header {
+  border: 2pt dotted goldenrod;
+}
+
+.weather-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-current {
+  border: 2pt solid red;
+}
+
+.right-past {
+  border: 2pt solid blue;
+}
+
+footer {
+  border: 2pt dotted green;
+}
