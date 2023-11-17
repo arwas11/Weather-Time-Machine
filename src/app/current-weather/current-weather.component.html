@@ -1,1 +1,11 @@
-<p>current-weather works!</p>
+<h2>Current Weather</h2>
+<form  (submit)="submitLocation()">
+    <label for="location">Enter Location</label>
+    <br>
+    <input id="location-input" >
+    <button type="submit">Submit</button>
+</form>
+
+<div *ngIf="fetchedCurrentData">
+    <h2>{{fetchedCurrentData}}</h2>
+</div>
