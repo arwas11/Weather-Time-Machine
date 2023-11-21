@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
+import { CurrentConditions } from './current-conditions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CurrentWeatherService {
 
-  constructor() { }
+  
 
-  submitLocation(location: string) {
-    // log with hard coded data
-    // console.log(
-    //   `Home application received: firstName: ${firstName}, lastName: ${lastName}, email: ${email}`
-    // );
-    console.log(location);
-  }
+  // constructor(currentCondition: CurrentConditions) { }
+
+  // getCity():void{
+
+  //   return this.currentCondition.city()
+  // }
 }

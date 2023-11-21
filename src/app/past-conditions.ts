@@ -11,18 +11,22 @@ export interface PastConditions {
     longitude: number;
     startDate: Date;
     endDate: Date;
-    timezone?: string;
-    temperatureUnit?: string;
-    windSpeedUnit?: string;
-    //info to get
-    // temperatureMax: number;
-    // temperatureMin: number;
+    city?: string
+    temperatureMax: number;
+    temperatureMin: number;
+    Rain?: number;
+    snow?: number;
+    windSpeedMax: number;
+
+
+    // timezone?: string;
+    // temperatureUnit?: string;
+    // windSpeedUnit?: string;
+    // extra info to get
     // sunrise?: string | Date;
     // sunset?:  string | Date ;
-    // windSpeedMax: number;
     // windDirection?: number;
     // weatherCode: number;
-    // city?: string;
     // snowfallSum?: number;
     // rainSum: number;
 }

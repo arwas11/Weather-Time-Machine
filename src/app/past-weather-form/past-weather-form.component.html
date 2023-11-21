@@ -1,0 +1,46 @@
+<div class="past-form-div" [hidden]="submitted">
+  past form
+  <div>
+    <form (ngSubmit)="onSubmit()" #pastWeatherForm="ngForm">
+      <label for="date"> <h3>Enter Date</h3></label>
+      <br />
+      <input
+        id="date"
+        type="date"
+        name="date"
+        [(ngModel)]="date"
+        required
+        min="1940-01-01"
+        [max]="maxDate"
+      />
+
+      <button
+        type="submit"
+        class="btn btn-success"
+        [disabled]="!pastWeatherForm.form.valid"
+        (click)="submitted = true"
+      >
+        submit
+      </button>
+    </form>
+  </div>
+</div>
+
+<div class="past-data-display-div" [hidden]="!submitted">
+  <h1>Past Data</h1>
+  <h3>--city--'s Weather on {{ dateDisplayFormat }} --endDate--</h3>
+  <h3>Highest Temperature: --description--</h3>
+  <h3>Lowest Temperature: --temperature--</h3>
+  <h3>Rain: --rain--</h3>
+  <h3>Snow: --snow--</h3>
+  <h3>Wind Speed: --windSpeed--</h3>
+
+  <button
+    type="submit"
+    class="btn btn-success"
+    [disabled]="!pastWeatherForm.form.valid"
+    (click)="submitted = false"
+  >
+    clear
+  </button>
+</div>

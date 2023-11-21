@@ -1,0 +1,9 @@
+.current-form-div {
+  border: 2pt solid darkslateblue;
+  margin: 10px 10px 10px 10px;
+}
+
+.current-data-display-div {
+  border: 2pt solid lawngreen;
+  margin: 10px 10px 10px 10px;
+}

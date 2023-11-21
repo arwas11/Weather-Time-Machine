@@ -1,11 +1,1 @@
-<h2>Past Weather</h2>
-<form (submit)="submitDate()">
-    <label for="date">Enter Date</label>
-    <br>
-    <input id="date-input" type="date" min="1940-01-01" max="2018-12-31">
-    <button type="submit">Submit</button>
-</form>
-
-<div *ngIf="fetchedPastData">
-    <h2>{{fetchedPastData}}</h2>
-</div>
+<app-past-weather-form></app-past-weather-form>

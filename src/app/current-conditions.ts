@@ -1,18 +1,21 @@
 export interface CurrentConditions {
     lat: number;
     lon: number;
-    units?: string; // imperial F or metric
+    city?: string;
+    description: string;
+    temperature: number;
+    feelsLike?: number;
+    rain?: number;
+    snow?: number;
+    windSpeed: number;
 
-    //info to get
-    // description: string;
-    // cityName?: string;
-    // temperature:  number;
-    // feelsLike?: number;
+    // units?: string; // imperial F or metric
+
+    // extra info to get
     // sunset?: number;
     // sunrise?: number
     // humidity?: number;
-    //not sure
-    // windSpeed: number;
+    // not sure
     // windDirection: string;
     // visibility?: number
     // snowLevels?: number;
