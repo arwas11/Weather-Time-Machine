@@ -1,32 +1,32 @@
 //there are vars in the url that I will need to have set:
-    //temperature_unit (default is C, need F),
-    //wind_speed_unit (default is kmh, need mph) 
-    // precipitation_unit (default is mm, need inch)
-    // timeformat (default iso8601, check docs)
-    // timezone	(GMT, check docs)
-
+//temperature_unit (default is C, need F),
+//wind_speed_unit (default is kmh, need mph)
+// precipitation_unit (default is mm, need inch)
+// timeformat (default iso8601, check docs)
+// timezone	(GMT, check docs)
 
 export interface PastConditions {
-    latitude: number;
-    longitude: number;
-    startDate: Date;
-    endDate: Date;
-    city?: string
-    temperatureMax: number;
-    temperatureMin: number;
-    Rain?: number;
-    snow?: number;
-    windSpeedMax: number;
-
-
-    // timezone?: string;
-    // temperatureUnit?: string;
-    // windSpeedUnit?: string;
-    // extra info to get
-    // sunrise?: string | Date;
-    // sunset?:  string | Date ;
-    // windDirection?: number;
-    // weatherCode: number;
-    // snowfallSum?: number;
-    // rainSum: number;
+  latitude: number;
+  longitude: number;
+  generationtime_ms?: number;
+  utc_offset_seconds?: number;
+  timezone?: string;
+  timezone_abbreviation?: string;
+  elevation?: number;
+  daily_units: {
+    time?: string;
+    temperature_2m_max: string;
+    temperature_2m_min?: string;
+    rain_sum: string;
+    snowfall_sum?: string;
+    wind_speed_10m_max: string;
+  };
+  daily: {
+    time: string[];
+    temperature_2m_max: number[];
+    temperature_2m_min: number[];
+    rain_sum: number[];
+    snowfall_sum: number[];
+    wind_speed_10m_max: number[];
+  };
 }

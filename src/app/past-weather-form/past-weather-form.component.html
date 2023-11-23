@@ -1,19 +1,20 @@
 <div class="past-form-div" [hidden]="submitted">
   past form
   <div>
-    <form (ngSubmit)="onSubmit()" #pastWeatherForm="ngForm">
+    <form (ngSubmit)="onSubmit(); getPastConditions(inputDate.value)" #pastWeatherForm="ngForm">
       <label for="date"> <h3>Enter Date</h3></label>
       <br />
       <input
         id="date"
         type="date"
         name="date"
-        [(ngModel)]="date"
         required
+        [(ngModel)]="date"
         min="1940-01-01"
         [max]="maxDate"
+        #inputDate
       />
-
+      <button (click)="testInput(inputDate.value)">test input</button>
       <button
         type="submit"
         class="btn btn-success"
@@ -25,20 +26,16 @@
     </form>
   </div>
 </div>
-
-<div class="past-data-display-div" [hidden]="!submitted">
+<!-- *ngIf="(pastConditionsData | json)as pastConditions" -->
+<div *ngIf="pastConditionsData[0]" class="past-data-display-div" [hidden]="!submitted">
   <h1>Past Data</h1>
-  <h3>--city--'s Weather on {{ dateDisplayFormat }} --endDate--</h3>
-  <h3>Highest Temperature: --description--</h3>
-  <h3>Lowest Temperature: --temperature--</h3>
-  <h3>Rain: --rain--</h3>
-  <h3>Snow: --snow--</h3>
-  <h3>Wind Speed: --windSpeed--</h3>
-
+  <h3>--city--'s Weather on {{ pastConditionsData[0].daily.time[0] || 'unavailable' }}</h3>
+  <h3>Highest Recorded Temperature: {{pastConditionsData[0].daily.temperature_2m_max[0].toFixed(0) || 'unavailable'}}{{pastConditionsData[0].daily_units.temperature_2m_max}}</h3>
+  <h3>Lowest Recorded Temperature: {{pastConditionsData[0].daily.temperature_2m_min[0].toFixed(0) || 'unavailable'}}{{pastConditionsData[0].daily_units.temperature_2m_max}}</h3>
+  <h3>Rain: {{pastConditionsData[0].daily.rain_sum[0].toFixed(0) || 'unavailable'}}"</h3>
+  <h3>Snow: {{ pastConditionsData[0].daily.snowfall_sum[0].toFixed(0) || 'unavailable'}}"</h3>
+  <h3>Wind Speed: {{ pastConditionsData[0].daily.wind_speed_10m_max[0].toFixed(0) || 'unavailable' }} {{pastConditionsData[0].daily_units.wind_speed_10m_max}}</h3>
   <button
-    type="submit"
-    class="btn btn-success"
-    [disabled]="!pastWeatherForm.form.valid"
     (click)="submitted = false"
   >
     clear
