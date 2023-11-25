@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
-import { CurrentWeatherComponent } from './current-weather/current-weather.component';
-import { PastWeatherComponent } from './past-weather/past-weather.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+
+import { HomePageComponent } from './home-page/home-page.component';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +10,10 @@ import { FooterComponent } from './footer/footer.component';
   imports: [
     CommonModule,
     RouterOutlet,
-    HeaderComponent,
-    CurrentWeatherComponent,
-    PastWeatherComponent,
-    FooterComponent
+    HomePageComponent,
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],

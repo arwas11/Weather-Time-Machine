@@ -36,6 +36,13 @@
   <!-- <h3>Rain: {{currentConditionsData[0].rain['1h'] || 'unavailable'}}</h3>
   <h3>Snow: {{currentConditionsData[0].snow['1h'] || 'unavailable'}}</h3> -->
   <h3>Wind Speed: {{currentConditionsData[0].wind.speed.toFixed(0)}}m/ph</h3>
+  
+  <button
+        (click)="testLatLon()"
+      >
+        test lat lon
+      </button>
+  
   <button
         (click)="submitted = false"
       >

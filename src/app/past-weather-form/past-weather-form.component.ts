@@ -12,7 +12,7 @@ import { LatLonService } from '../lat-lon.service';
 @Component({
   selector: 'app-past-weather-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, CurrentWeatherFormComponent],
   providers: [CurrentWeatherFormComponent],
   templateUrl: './past-weather-form.component.html',
   styleUrl: './past-weather-form.component.css',

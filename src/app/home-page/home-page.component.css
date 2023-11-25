@@ -1,0 +1,27 @@
+header {
+    border: 2pt dotted goldenrod;
+    margin: 10px 10px 10px 10px;
+  }
+  
+  .weather-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 10px 10px 10px;
+  }
+  
+  .left-current {
+    border: 2pt solid red;
+    margin: 10px 10px 10px 10px;
+  }
+  
+  .right-past {
+    border: 2pt solid blue;
+    margin: 10px 10px 10px 10px;
+  }
+  
+  footer {
+    border: 2pt dotted green;
+    margin: 10px 10px 10px 10px;
+  }
+  

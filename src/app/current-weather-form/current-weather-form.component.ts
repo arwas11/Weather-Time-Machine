@@ -15,17 +15,22 @@ import { LatLonService } from '../lat-lon.service';
   styleUrl: './current-weather-form.component.css',
 })
 export class CurrentWeatherFormComponent {
+  //CAN'T SHARE LAT & LON THIS WAY because this component is not injectable so I cannont provide it in the past weather component
   //pass these props to past weather form after fetch is successful
   //needed because the api query params requires them
   lat: number[] = [];
   lon: number[] = [];
 
-  assignAvailableLatLon(){
-    if (this.currentConditionsData[0].coord.lat && this.lat[0]){
-      this.lat[0] = this.currentConditionsData[0].coord.lat
-      this.lon[0] = this.currentConditionsData[0].coord.lon
-    }
+  testLatLon(){
+    console.log('in current, lat is ', this.lat[0]);
+    console.log('in current, lon is ',this.lon[0]);
   }
+  // assignAvailableLatLon(){
+  //   if (this.currentConditionsData[0].coord.lat && this.lat[0]){
+  //     this.lat[0] = this.currentConditionsData[0].coord.lat
+  //     this.lon[0] = this.currentConditionsData[0].coord.lon
+  //   }
+  // }
   constructor(private currentWeatherService: CurrentWeatherService, 
     // private latLonService : LatLonService
     ) {}
@@ -50,8 +55,8 @@ export class CurrentWeatherFormComponent {
           //assigning lat and lon to send to past weather form
           this.lat[0] = this.currentConditionsData[0].coord.lat;
           this.lon[0] = this.currentConditionsData[0].coord.lon;
-          console.log('in current, lat is ', this.lat[0]);
-          console.log('in current, lon is ',this.lon[0]);
+          // console.log('in current, lat is ', this.lat[0]);
+          // console.log('in current, lon is ',this.lon[0]);
           // data to display
           this.currentConditionsData[0].name = currentData.name;
           this.currentConditionsData[0].sys.country = currentData.sys.country;
