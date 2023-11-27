@@ -26,10 +26,10 @@
     </form>
   </div>
 </div>
-<!-- *ngIf="(pastConditionsData | json)as pastConditions" -->
+
 <div *ngIf="pastConditionsData[0]" class="past-data-display-div" [hidden]="!submitted">
   <h1>Past Data</h1>
-  <h3>--city--'s Weather on {{ pastConditionsData[0].daily.time[0] || 'unavailable' }}</h3>
+  <h3>{{currentWeatherService.city}}'s Weather on {{ pastConditionsData[0].daily.time[0] || 'unavailable' }}</h3>
   <h3>Highest Recorded Temperature: {{pastConditionsData[0].daily.temperature_2m_max[0].toFixed(0) || 'unavailable'}}{{pastConditionsData[0].daily_units.temperature_2m_max}}</h3>
   <h3>Lowest Recorded Temperature: {{pastConditionsData[0].daily.temperature_2m_min[0].toFixed(0) || 'unavailable'}}{{pastConditionsData[0].daily_units.temperature_2m_max}}</h3>
   <h3>Rain: {{pastConditionsData[0].daily.rain_sum[0].toFixed(0) || 'unavailable'}}"</h3>

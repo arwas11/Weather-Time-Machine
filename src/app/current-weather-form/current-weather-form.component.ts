@@ -5,7 +5,6 @@ import { CurrentConditions } from '../current-conditions';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { theCurrentKey } from '../theCurrentKey';
 import { CurrentWeatherService } from '../current-weather.service';
-import { LatLonService } from '../lat-lon.service';
 
 @Component({
   selector: 'app-current-weather-form',
@@ -14,64 +13,54 @@ import { LatLonService } from '../lat-lon.service';
   templateUrl: './current-weather-form.component.html',
   styleUrl: './current-weather-form.component.css',
 })
-export class CurrentWeatherFormComponent {
-  //CAN'T SHARE LAT & LON THIS WAY because this component is not injectable so I cannont provide it in the past weather component
-  //pass these props to past weather form after fetch is successful
-  //needed because the api query params requires them
-  lat: number[] = [];
-  lon: number[] = [];
+export class CurrentWeatherFormComponent implements OnInit {
 
-  testLatLon(){
-    console.log('in current, lat is ', this.lat[0]);
-    console.log('in current, lon is ',this.lon[0]);
-  }
-  // assignAvailableLatLon(){
-  //   if (this.currentConditionsData[0].coord.lat && this.lat[0]){
-  //     this.lat[0] = this.currentConditionsData[0].coord.lat
-  //     this.lon[0] = this.currentConditionsData[0].coord.lon
-  //   }
-  // }
-  constructor(private currentWeatherService: CurrentWeatherService, 
-    // private latLonService : LatLonService
-    ) {}
-  // mock data to test two way binding
-  location: string = '';
-  
-  
-
-  //-------fetching data-------
   currentConditionsData: CurrentConditions[] = [];
 
+  constructor(public currentWeatherService: CurrentWeatherService) {}
+  // mock data to test two way binding
+  location: string = '';
+
+  testLatLon() {
+    this.currentWeatherService.testLatLon();
+    // console.log('this is direct from service in current', this.currentWeatherService.currentConditionsData[0]);
+    console.log('this is data in current', this.currentConditionsData);
+  }
+
+  //-------fetching data in service-------
+
+  ngOnInit(): void {
+    this.getCurrentConditions()
+    this.currentWeatherService.getFetchedData().subscribe(currentData => {
+      this.currentConditionsData[0] = currentData;
+      console.log('this is data in current', this.currentConditionsData);
+      //assigning lat and lon to send to past weather form
+      // data to display
+      if (this.currentConditionsData[0]){
+        this.currentConditionsData[0].name = currentData.name;
+        // this.city = currentData.name;
+        this.currentConditionsData[0].sys.country = currentData.sys.country;
+        this.currentConditionsData[0].weather[0].description = currentData.weather[0].description;
+        this.currentConditionsData[0].main.temp = currentData.main.temp
+        this.currentConditionsData[0].main.feels_like = currentData.main.feels_like;
+  
+        // add logic to not read rain and snow if undefined
+        // this.currentConditionsData[0].rain["1h"] = currentData.rain["1h"];
+        // this.currentConditionsData[0].snow['1h'] = currentData.snow['1h'];
+        this.currentConditionsData[0].wind.speed = currentData.wind.speed;
+        console.log('inside current===', this.currentConditionsData[0]);
+      }
+
+    })
+  }
   // add error handling
-  getCurrentConditions(city: string) {
+  getCurrentConditions(city?: string) {
     if (city) {
       city.trim();
-      this.currentWeatherService
-        .getCurrentConditions(city)
-        .subscribe((currentData) => {
-          // console.log(currentData);
-          //assign incoming data to the array
-          this.currentConditionsData = [currentData];
-          //assigning lat and lon to send to past weather form
-          this.lat[0] = this.currentConditionsData[0].coord.lat;
-          this.lon[0] = this.currentConditionsData[0].coord.lon;
-          // console.log('in current, lat is ', this.lat[0]);
-          // console.log('in current, lon is ',this.lon[0]);
-          // data to display
-          this.currentConditionsData[0].name = currentData.name;
-          this.currentConditionsData[0].sys.country = currentData.sys.country;
-          this.currentConditionsData[0].weather[0].description = currentData.weather[0].description;
-          this.currentConditionsData[0].main.temp = currentData.main.temp
-          this.currentConditionsData[0].main.feels_like = currentData.main.feels_like;
-          // add logic to not read rain and snow if undefined
-          // this.currentConditionsData[0].rain["1h"] = currentData.rain["1h"];
-          // this.currentConditionsData[0].snow['1h'] = currentData.snow['1h'];
-          this.currentConditionsData[0].wind.speed = currentData.wind.speed;
-          // console.log('===', this.currentConditionsData[0].coord.lat);
-
-        });
+      this.currentWeatherService.getCurrentConditions(city)
     }
   }
+
   submitted = false;
 
   onSubmit() {

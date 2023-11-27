@@ -6,6 +6,7 @@
 // timezone	(GMT, check docs)
 
 export interface PastConditions {
+  city?: string;
   latitude: number;
   longitude: number;
   generationtime_ms?: number;
