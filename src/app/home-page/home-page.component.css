@@ -4,12 +4,23 @@ header {
   }
   
   .weather-info {
+    border: 2pt solid palevioletred;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 10px 10px 10px 10px;
   }
+
+  .main {
+    border: 2pt dotted rgb(68, 167, 200);
+    margin: 10px 10px 10px 10px;
+  }
   
+  .signup-login-div {
+    border: 2pt solid tomato;
+    margin: 10px 10px 10px 10px;
+  }
+
   .left-current {
     border: 2pt solid red;
     margin: 10px 10px 10px 10px;
@@ -20,6 +31,10 @@ header {
     margin: 10px 10px 10px 10px;
   }
   
+  .comments{
+    border: 2pt solid rgb(109, 52, 140);
+    margin: 10px 10px 10px 10px;
+  }
   footer {
     border: 2pt dotted green;
     margin: 10px 10px 10px 10px;

@@ -1,40 +1,42 @@
-<div>
-    <h2>Sign Up</h2>
-    <form [formGroup]="userSignUpInfo" (ngSubmit)="signUpOnSubmit()">
+<button type="button" (click)="toggleSignUp()"><h2>Sign Up</h2></button>
+
+<div [hidden]="signUpDiv">
+  <form
+    [formGroup]="userSignUpInfo"
+    (ngSubmit)="signUpOnSubmit()"
+    #signUpForm="ngForm"
+  >
     <label for="username-signup">Username</label>
-    <br>
-    <input type="text" id="username-signup" formControlName="username" required>
-    <br>
-    <button type="button" (click)="clearUsername()"> test clear</button>
+    <br />
+    <input type="text" id="username-signup" [formControl]="username" required />
+    <br />
+    <button type="button">test clear</button>
     <label for="email-signup">Email</label>
-    <br>
-    <input type="email" id="email-signup" formControlName="email" required>
-    <br>
+    <br />
+    <input type="email" id="email-signup" [formControl]="email" required />
+    <br />
     <label for="password-signup">Password</label>
-    <br>
-    <input type="password" id="password-signup" formControlName="password" required>
+    <br />
+    <input
+      type="password"
+      id="password-signup"
+      [formControl]="password"
+      required
+    />
     <!-- disabled binding attached to it to disable the button when profileForm is invalid -->
-    <button type="submit" [disabled]="!userSignUpInfo.valid">Submit</button>
-</form>
+    <button
+      type="submit"
+      class="btn btn-success"
+      [disabled]="!signUpForm.valid"
+    >
+      Submit
+    </button>
+  </form>
+  <!-- <h1>
+    <a routerLink="home" routerLinkActive="active" ariaCurrentWhenActive="page"
+      >return to home page</a
+    >
+  </h1> -->
 </div>
-<div>
-    Displaying
-    <!-- <p>{{userSignUpInfo.valueI}}</p> -->
-    <!-- <p>{{username.value}}</p> -->
-    <!-- <p>{{email.value}}</p>
-    <p>{{password.value}}</p> -->
-</div>
-<hr>
-<div>
-    <h2>Log In</h2>
-    <form [formGroup]="userLoginInfo" (ngSubmit)="loginOnSubmit()">
-    <label for="username-login">Username</label>
-    <br>
-    <input type="text" id="username-login" formControlName="username" required>
-    <br>
-    <label for="password-login">Password</label>
-    <br>
-    <input type="password" id="password-login" formControlName="password" required>
-    <br>
-</form>
-</div>
+
+<app-login-form></app-login-form>

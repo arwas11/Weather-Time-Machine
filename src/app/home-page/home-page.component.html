@@ -1,8 +1,12 @@
 <header class="header">
-    <h1>{{ title }}</h1>
+  <h1 ><a routerLink="home" routerLinkActive="active" ariaCurrentWhenActive="page">{{ title }}</a></h1>
+
     <app-header></app-header>
   </header>
   <main class="main">
+    <div class="signup-login-div">
+      <app-signup-login-form></app-signup-login-form>
+    </div>
     <div class="weather-info">
       <div class="left-current">
         <h2>Current Weather</h2>
@@ -12,6 +16,9 @@
         <h2>Past Weather</h2>
         <app-past-weather ></app-past-weather>
       </div>
+    </div>
+    <div class="comments">
+      <app-user-comments></app-user-comments>
     </div>
   </main>
   <footer class="footer">

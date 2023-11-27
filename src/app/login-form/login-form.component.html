@@ -1,0 +1,15 @@
+<button type="button" (click)="toggleLogin()"><h2>Log in</h2></button>
+<div [hidden]="loginDiv">
+    <h2>Log In</h2>
+    <form [formGroup]="userLoginInfo" (ngSubmit)="loginOnSubmit()" #loginForm="ngForm">
+    <label for="username-login">Username</label>
+    <br>
+    <input type="text" id="username-login" formControlName="username" required>
+    <br>
+    <label for="password-login">Password</label>
+    <br>
+    <input type="password" id="password-login" formControlName="password" required>
+    <br>
+    <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">login</button>
+</form>
+</div>

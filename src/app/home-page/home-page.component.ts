@@ -5,6 +5,9 @@ import { CurrentWeatherComponent } from '../current-weather/current-weather.comp
 import { PastWeatherComponent } from '../past-weather/past-weather.component';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
+import { UserCommentsComponent } from '../user-comments/user-comments.component';
+import { SignupLoginFormComponent } from '../signup-login-form/signup-login-form.component';
+import { LoginFormComponent } from '../login-form/login-form.component';
 
 @Component({
   selector: 'app-home-page',
@@ -13,11 +16,14 @@ import { FooterComponent } from '../footer/footer.component';
     CommonModule,
     RouterOutlet,
     HeaderComponent,
+    SignupLoginFormComponent,
+    LoginFormComponent,
     CurrentWeatherComponent,
     PastWeatherComponent,
+    UserCommentsComponent,
     FooterComponent,
     RouterLink,
-    RouterLinkActive,
+    RouterLinkActive
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css',
