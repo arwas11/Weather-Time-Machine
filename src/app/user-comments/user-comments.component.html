@@ -1,18 +1,18 @@
 <h3 class="comments-title">Comments</h3>
-<label for="add-comment-subject"></label>
-<input type="text" id="add-comment-subject" required>
-<label for="add-comment-text"></label>
-<input type="text" id="add-comment-text" required>
-<button class="add-comment-btn">Add Comment</button>
+<div 
+class="add-comment-div"
+ >
+    <input type="text" id="add-comment-text" placeholder="comment here" [formControl]="text" required />
+    <button type="button" class="add-comment-btn"  (click)="addComment()">Add Comment</button>
+</div>
 
 <div class="displayed-comments-div">
-    <ul *ngIf="comments.length > 0">
-        <li *ngFor="let comment of comments" class="displayed-comment">
-            {{comment.subject}}
-            <br>
-            {{comment.text}}
-            <button class="edit-comment-btn">edit</button>
-            <button class="delete-comment-btn">delete</button>
-        </li>
-    </ul>
+  <ul *ngIf="comments.length > 0">
+    <li *ngFor="let comment of comments" class="displayed-comment">
+      {{ comment.text }} 
+      <!-- <span>By: {{comment.UserId}}</span> -->
+      <button class="edit-comment-btn">edit</button>
+      <button class="delete-comment-btn">delete</button>
+    </li>
+  </ul>
 </div>

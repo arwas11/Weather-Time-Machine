@@ -5,7 +5,6 @@ const User = require('./User')
 class Comment extends Model {};
 
 Comment.init({
-    subject: DataTypes.STRING(10),
     text: DataTypes.STRING,
 },{
     sequelize: db,

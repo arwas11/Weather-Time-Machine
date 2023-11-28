@@ -2,7 +2,7 @@ const User = require('./User')
 const Comment = require('./Comment')
 
 User.hasMany(Comment)
-Comment.hasOne(User)
+Comment.belongsTo(User)
 
 module.exports = {
   User,

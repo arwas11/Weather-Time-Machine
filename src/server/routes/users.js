@@ -49,12 +49,12 @@ usersRouter.get("/:username/comments", async (req, res, next) => {
 });
 
 // PUT associate a user with a comment they have posted
-usersRouter.put("/:username/shows/:commentSubject", async (req, res, next) => {
+usersRouter.put("/:username/shows/:commentId", async (req, res, next) => {
   const username = req.params.username;
-  const commentSubject = req.params.commentSubject;
+  const commentId = req.params.commentId;
 
   try {
-    const comment = await Comment.findOne({ where: { commentSubject: commentSubject } }, { include: User });
+    const comment = await Comment.findOne({ where: { commentId: commentId } }, { include: User });
     const user = await User.findOne({ where: { username: username } }, { include: Comment });
     await user.addComment(comment);
     const userComments = await User.getComments();

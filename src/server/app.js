@@ -7,7 +7,7 @@ const path = require("path");
 const cors = require("cors");
 const usersRouter = require("./routes/users");
 const commentsRouter = require("./routes/comments");
-const { User } = require("./models");
+
 
 //Allow CORS requests
 app.use(cors());
