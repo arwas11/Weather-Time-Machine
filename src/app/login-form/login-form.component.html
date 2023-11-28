@@ -1,43 +1,41 @@
-<button type="button" (click)="toggleLogin()">
+<button class="nav-btn" type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" (click)="toggleLogin()">
   <!-- <a
     routerLink="/signup-login"
     routerLinkActive="active"
     ariaCurrentWhenActive="page"
     >Log in</a
   > -->
-  Log in
+  Log in 
 </button>
 <div [hidden]="loginDiv">
-  <h2>Log In</h2>
   <form
     [formGroup]="userLoginInfo"
     (ngSubmit)="loginOnSubmit()"
     #loginForm="ngForm"
   >
-    <label for="username-login">Username</label>
     <br />
     <input
       type="text"
+      placeholder="username"
       id="username-login"
       formControlName="username"
       required
     />
     <br />
-    <label for="password-login">Password</label>
-    <br />
     <input
       type="password"
       id="password-login"
+      placeholder="password"
       formControlName="password"
       required
     />
     <br />
     <button
       type="submit"
-      class="btn btn-success"
+      class="btn btn-light"
       [disabled]="!loginForm.form.valid"
     >
-      login
+      log in
     </button>
   </form>
 </div>

@@ -1,9 +1,11 @@
 <div class="past-form-div" [hidden]="submitted">
-  past form
   <div>
-    <form (ngSubmit)="onSubmit(); getPastConditions(inputDate.value)" #pastWeatherForm="ngForm">
-      <label for="date"> <h3>Enter Date</h3></label>
-      <br />
+    <form (ngSubmit)="onSubmit(); getPastConditions(inputDate.value)" 
+    class="past-form"
+    #pastWeatherForm="ngForm">
+      <label for="date"> <h3>Past Weather 
+        <br>
+        <span class="five-days-prior-note">*starting 5 days prior to today's </span></h3></label>
       <input
         id="date"
         type="date"
@@ -14,10 +16,11 @@
         [max]="maxDate"
         #inputDate
       />
-      <button (click)="testInput(inputDate.value)">test input</button>
+      <!-- <button (click)="testInput(inputDate.value)">test input</button> -->
       <button
         type="submit"
-        class="btn btn-success"
+        class="submit-past-info-btn"
+        class="btn btn-light"
         [disabled]="!pastWeatherForm.form.valid"
         (click)="submitted = true"
       >
@@ -28,16 +31,22 @@
 </div>
 
 <div *ngIf="pastConditionsData[0]" class="past-data-display-div" [hidden]="!submitted">
-  <h1>Past Data</h1>
-  <h3>{{currentWeatherService.city}}'s Weather on {{ pastConditionsData[0].daily.time[0] || 'unavailable' }}</h3>
-  <h3>Highest Recorded Temperature: {{pastConditionsData[0].daily.temperature_2m_max[0].toFixed(0) || 'unavailable'}}{{pastConditionsData[0].daily_units.temperature_2m_max}}</h3>
-  <h3>Lowest Recorded Temperature: {{pastConditionsData[0].daily.temperature_2m_min[0].toFixed(0) || 'unavailable'}}{{pastConditionsData[0].daily_units.temperature_2m_max}}</h3>
+  <div class="past-dipslayed-data-div">
+  <h5>{{currentWeatherService.city}}'s Weather on {{ pastConditionsData[0].daily.time[0] || 'unavailable' }}</h5>
+  <br>
+  <h3>{{pastConditionsData[0].daily.temperature_2m_max[0].toFixed(0) || 'unavailable'}}{{pastConditionsData[0].daily_units.temperature_2m_max}}</h3>
+  <h6>Highest Recorded Temperature</h6>
+  <br>
+  <h3>{{pastConditionsData[0].daily.temperature_2m_min[0].toFixed(0) || 'unavailable'}}{{pastConditionsData[0].daily_units.temperature_2m_max}}</h3>
+  <h6>Lowest Recorded Temperature</h6>
   <!-- <h3>Rain: {{pastConditionsData[0].daily.rain_sum[0].toFixed(0) || 'unavailable'}}"</h3>
   <h3>Snow: {{ pastConditionsData[0].daily.snowfall_sum[0].toFixed(0) || 'unavailable'}}"</h3>
   <h3>Wind Speed: {{ pastConditionsData[0].daily.wind_speed_10m_max[0].toFixed(0) || 'unavailable' }} {{pastConditionsData[0].daily_units.wind_speed_10m_max}}</h3> -->
-  <button
-    (click)="submitted = false"
-  >
-    clear
-  </button>
+</div>
+<button
+  (click)="submitted = false"
+  class="btn btn-light"
+>
+  clear
+</button>
 </div>

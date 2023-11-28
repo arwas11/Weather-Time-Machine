@@ -1,5 +1,5 @@
-<div class="div-to-sign-login" [hidden]="loggedInUserInfo">
-  <button type="button" (click)="toggleSignUp()">
+<div class="div-to-sign-login" [hidden]="loggedInUserInfo" >
+  <button class="nav-btn" type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" (click)="toggleSignUp()">
     <!-- <a
       routerLink="/signup-login"
       routerLinkActive="active"
@@ -15,24 +15,21 @@
       (ngSubmit)="signUpOnSubmit()"
       #signUpForm="ngForm"
     >
-      <label for="username-signup">Username</label>
       <br />
       <input
         type="text"
+        placeholder="username"
         id="username-signup"
         [formControl]="username"
         required
       />
       <br />
-      <button type="button">test clear</button>
-      <label for="email-signup">Email</label>
-      <br />
-      <input type="email" id="email-signup" [formControl]="email" required />
-      <br />
-      <label for="password-signup">Password</label>
+      <!-- <button type="button">test clear</button> -->
+      <input type="email" placeholder="email" id="email-signup" [formControl]="email" required />
       <br />
       <input
         type="password"
+        placeholder="password"
         id="password-signup"
         [formControl]="password"
         required
@@ -40,10 +37,10 @@
       <!-- disabled binding attached to it to disable the button when profileForm is invalid -->
       <button
         type="submit"
-        class="btn btn-success"
+        class="btn btn-light"
         [disabled]="!signUpForm.valid"
       >
-        Submit
+        sign up
       </button>
     </form>
     <!-- <h1>

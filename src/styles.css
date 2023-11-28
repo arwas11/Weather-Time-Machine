@@ -1,1 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+/* @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900); */
+@import url(https://fonts.googleapis.com/css?family=Libre+Baskerville);
+
+
+html,
+body {
+  background: url("./assets/sky_hd-wallpaper-1680x1050.jpg") no-repeat center
+    center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: 'Libre Baskerville';
+  color: black;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+input {
+
+    display: block;
+    width: auto;
+    margin: 11px;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    font-size: 11pt;
+    transition: 0.3s ease;
+    border-bottom: 2px solid white;
+  }
+

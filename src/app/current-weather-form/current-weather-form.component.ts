@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { CurrentConditions } from '../current-conditions';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { theCurrentKey } from '../theCurrentKey';
+import { HttpClientModule } from '@angular/common/http';
 import { CurrentWeatherService } from '../current-weather.service';
 
 @Component({

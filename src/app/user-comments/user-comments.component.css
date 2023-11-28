@@ -1,0 +1,32 @@
+.comments-div {
+    padding: 13px;
+    height: -webkit-fill-available;
+}
+
+.comments-title {
+    text-align: center;
+}
+
+.comments-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.displayed-comment{
+    display: inline-grid;
+    justify-items: center;
+    align-items: center;
+}
+
+#add-comment-input {
+    display: inline;
+}
+
+.add-comment-div {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    margin: 7px;
+}

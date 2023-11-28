@@ -1,42 +1,108 @@
 header {
-    border: 2pt dotted goldenrod;
-    margin: 10px 10px 10px 10px;
-  }
-  
-  .weather-info {
-    border: 2pt solid palevioletred;
+  text-align: center;
+  margin: 20px 5px;
+  padding: 5px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  width: auto;
+  height: auto;
+  background-color: #ffffff29;
+  box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);
+  animation: appear 500ms ease-out forwards;
+}
+
+.title-link {
+  text-decoration: none;
+  font-size: 33pt;
+  color: black;
+}
+
+nav {
+  margin: 20px 5px;
+  padding: 5px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  width: auto;
+  height: auto;
+  background-color: #ffffff29;
+  box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);
+  animation: appear 500ms ease-out forwards;
+  display: flex;
+}
+.weather-info {
+  /* border: 2pt solid palevioletred;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px 10px 10px 10px;
-  }
+    margin: 10px 10px 10px 10px; */
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
 
-  .main {
-    border: 2pt dotted rgb(68, 167, 200);
-    margin: 10px 10px 10px 10px;
-  }
-  
-  .signup-login-div {
-    border: 2pt solid tomato;
-    margin: 10px 10px 10px 10px;
-  }
+.main {
+  /* border: 2pt dotted rgb(68, 167, 200);
+  margin: 10px 10px 10px 10px; */
+}
 
-  .left-current {
-    border: 2pt solid red;
-    margin: 10px 10px 10px 10px;
-  }
-  
-  .right-past {
-    border: 2pt solid blue;
-    margin: 10px 10px 10px 10px;
-  }
-  
-  .comments{
-    border: 2pt solid rgb(109, 52, 140);
-    margin: 10px 10px 10px 10px;
-  }
-  footer {
-    border: 2pt dotted green;
-    margin: 10px 10px 10px 10px;
-  }
-  
+.signup-login-div {
+  /* border: 2pt solid tomato;
+  margin: 10px 10px 10px 10px; */
+}
+
+.left-current {
+  /* border: 2pt solid red;
+    margin: 10px 10px 10px 10px; */
+  margin: 20px 5px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  width: 315px;
+  height: 350px;
+  background-color: #ffffff29;
+  box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);
+  animation: appear 500ms ease-out forwards;
+}
+
+.right-past {
+  /* border: 2pt solid blue;
+    margin: 10px 10px 10px 10px; */
+  margin: 20px 5px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  width: 315px;
+  height: 350px;
+  background-color: #ffffff29;
+  box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);
+  animation: appear 500ms ease-out forwards;
+}
+
+.comments {
+  /* border: 2pt solid rgb(109, 52, 140);
+  margin: 10px 10px 10px 10px; */
+  margin: 20px 5px;
+  border-radius: 20px;
+  position: relative;
+  overflow: scroll;  width: auto;
+  height: 150px;
+  background-color: #ffffff29;
+  box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);
+  animation: appear 500ms ease-out forwards;
+}
+footer {
+  margin: 20px 5px;
+  padding: 5px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  width: auto;
+  height: auto;
+  background-color: #ffffff29;
+  box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);
+  animation: appear 500ms ease-out forwards;
+}

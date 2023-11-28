@@ -1,18 +1,62 @@
-<h3 class="comments-title">Comments</h3>
-<div 
-class="add-comment-div"
- >
-    <input type="text" id="add-comment-text" placeholder="comment here" [formControl]="text" required />
-    <button type="button" class="add-comment-btn"  (click)="addComment()">Add Comment</button>
-</div>
-
+<div class="comments-div">
+<h5 class="comments-title">Comments</h5>
+<!-- if user = show add comment
+    if no user show sign up/login to add a comment
+-->
 <div class="displayed-comments-div">
-  <ul *ngIf="comments.length > 0">
+  <ul *ngIf="comments.length > 0" class="comments-list">
     <li *ngFor="let comment of comments" class="displayed-comment">
-      {{ comment.text }} 
+      {{ comment.text }}
       <!-- <span>By: {{comment.UserId}}</span> -->
-      <button class="edit-comment-btn">edit</button>
-      <button class="delete-comment-btn">delete</button>
-    </li>
-  </ul>
+      <br />
+      <div>
+      <button
+      type="button"
+      class="btn btn-light"
+      style="
+          --bs-btn-padding-y: 0.25rem;
+          --bs-btn-padding-x: 0.5rem;
+          --bs-btn-font-size: 0.75rem;
+        "
+      >
+      edit
+    </button>
+    <button
+    type="button"
+    class="btn btn-light"
+    style="
+          --bs-btn-padding-y: 0.25rem;
+          --bs-btn-padding-x: 0.5rem;
+          --bs-btn-font-size: 0.75rem;
+        "
+      >
+      delete
+    </button>
+  </div>
+  </li>
+</ul>
+</div>
+<div class="add-comment-div">
+  <input
+  #addCommentForm="ngForm"
+    type="text"
+    id="add-comment-input"
+    placeholder="comment here"
+    [formControl]="text"
+    required
+  />
+  <button
+    type="submit"
+    class="btn btn-light"
+        style="
+          --bs-btn-padding-y: 0.25rem;
+          --bs-btn-padding-x: 0.5rem;
+          --bs-btn-font-size: 0.75rem;
+        "
+    [disabled]="!addCommentForm.form.valid"
+    (click)="addComment()"
+  >
+    add comment
+  </button>
+</div>
 </div>
