@@ -26,7 +26,7 @@ export class LoginService {
     return this.http
       .get<User>(userUrl)
       .pipe(
-        tap((user) => console.log(`fetched hero ${user} with username=${username}`)),
+        tap((user) => console.log(`fetched user,${user}, with username=${username}`)),
         catchError(this.handleError<User>(`getUser username = ${username}`))
       );
   }

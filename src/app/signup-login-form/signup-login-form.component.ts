@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SignupLoginService } from '../signup-login.service';
 import { User } from '../user';
 import { LoginFormComponent } from '../login-form/login-form.component';
+import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 @Component({
   selector: 'app-signup-login-form',
@@ -18,6 +19,7 @@ import { LoginFormComponent } from '../login-form/login-form.component';
   imports: [
     CommonModule,
     LoginFormComponent,
+    UserProfileComponent,
     ReactiveFormsModule,
     RouterLink,
     RouterLinkActive,
@@ -28,9 +30,9 @@ import { LoginFormComponent } from '../login-form/login-form.component';
 })
 
 //utilizing angular's reactive forms
-export class SignupLoginFormComponent implements OnInit {
-
-  user: any;
+export class SignupLoginFormComponent {
+  loggedInUserInfo: any;
+  userIsLoggedIn = false;
 
   constructor(private signupLoginService: SignupLoginService) {}
 
@@ -56,27 +58,26 @@ export class SignupLoginFormComponent implements OnInit {
     password: this.password,
   });
 
-  ngOnInit(): void {
-    
-  }
-
+  // ngOnInit(): void {}
+  //to toggle between components
+  signUpLoginDiv = true;
+  profileDiv = true;
   signUpDiv = true;
   loginDiv = true;
   submitted = false;
 
-  toggleSignUp(){
+  toggleSignUp() {
     this.signUpDiv = !this.signUpDiv;
   }
 
-  toggleLogin(){
+  toggleLogin() {
     this.loginDiv = !this.loginDiv;
   }
 
-
   signUpOnSubmit() {
     this.signUpDiv = true;
-    let userInfo = this.userSignUpInfo.value
-    console.log("in the component ", userInfo);
+    let userInfo = this.userSignUpInfo.value;
+    console.log('in the component ', userInfo);
     console.warn(this.userSignUpInfo.value);
 
     // TODO: Use EventEmitter with form value
@@ -85,14 +86,12 @@ export class SignupLoginFormComponent implements OnInit {
     // You trigger the event by clicking a button with submit
     // console.warn(this.userSignUpInfo.value);
 
-    this.signupLoginService.addUser(userInfo).subscribe(user => {
-      this.user = user
-    })
-    
+    this.signupLoginService.addUser(userInfo).subscribe((user) => {
+      this.loggedInUserInfo = user;
+      this.userIsLoggedIn = true;
+    });
+
     // to clear input after submitting
-      this.userSignUpInfo.reset()
-
+    this.userSignUpInfo.reset();
   }
-
-
 }

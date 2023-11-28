@@ -1,7 +1,10 @@
 <div class="current-form-div" [hidden]="submitted">
   current form
   <div>
-    <form (ngSubmit)="onSubmit(); getCurrentConditions(inputCity.value)" #currentWeatherForm="ngForm">
+    <form
+      (ngSubmit)="onSubmit(); getCurrentConditions(inputCity.value)"
+      #currentWeatherForm="ngForm"
+    >
       <label for="location"> <h3>Enter Location</h3> </label>
       <br />
       <input
@@ -16,37 +19,38 @@
         type="submit"
         class="btn btn-success"
         [disabled]="!currentWeatherForm.form.valid"
-        (click)="!submitted"
+        (click)="(!submitted)"
       >
         submit
       </button>
     </form>
-    </div>
-    
   </div>
-  <button
-  (click)="testLatLon()"
+</div>
+<button (click)="testLatLon()">test lat lon</button>
+
+<div
+  *ngIf="currentConditionsData[0]"
+  class="current-data-display-div"
+  [hidden]="!submitted"
 >
-  test lat lon
-</button>
-  
-<div *ngIf="currentConditionsData[0]" class="current-data-display-div" [hidden]="!submitted">
   <h1>Current Data</h1>
-  <h3> {{currentConditionsData[0].name}},{{currentConditionsData[0].sys.country}} Current Weather</h3>
-  <h3>Description: {{currentConditionsData[0].weather[0].description}}</h3>
-  <h3>Temperature: {{currentConditionsData[0].main.temp.toFixed(0)}}°F</h3>
-  <h3>Feels Like: {{currentConditionsData[0].main.feels_like.toFixed(0)}}°F</h3>
+  <h3>
+    {{ currentConditionsData[0].name }},{{
+      currentConditionsData[0].sys.country
+    }}
+    Current Weather
+  </h3>
+  <h3>Description: {{ currentConditionsData[0].weather[0].description }}</h3>
+  <h3>Temperature: {{ currentConditionsData[0].main.temp.toFixed(0) }}°F</h3>
+  <h3>
+    Feels Like: {{ currentConditionsData[0].main.feels_like.toFixed(0) }}°F
+  </h3>
   <!-- <h3 *ngIfElse="currentConditionsData.rain['1h']; else unavailable_data">Rain: {{currentConditionsData.rain['1h']}}</h3>
   <h3 *ngIfElse="currentConditionsData.snow['1h']; else unavailable_data">Snow: {{currentConditionsData.snow['1h'] || 'unavailable'}}</h3>
   <ng-template #unavailable_data>Snow: unavailable</ng-template> 
   <h3>Rain: {{currentConditionsData.rain['1h'] || 0}}"</h3>
   <h3>Snow: {{currentConditionsData.snow['1h'] || 0}}"</h3>
   <h3>Wind Speed: {{currentConditionsData[0].wind.speed.toFixed(0)}}mp/h</h3>  -->
-  
 
-  <button
-        (click)="submitted = false"
-      >
-        clear
-      </button>
+  <button (click)="submitted = false">clear</button>
 </div>

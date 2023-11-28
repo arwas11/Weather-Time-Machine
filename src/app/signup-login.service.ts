@@ -18,27 +18,28 @@ export class SignupLoginService {
   user: any;
 
   constructor(private http: HttpClient) {
-    this.findAll();
+    // this.findAll();
   }
 
-  findAll() {
-    //Not necessary. used to make sure the data expected matches the type of User[]
-    this.http.get<User[]>(`${this.usersUrl}`).subscribe((users) => {
-      this.users = users;
-    });
-  }
+  // findAll() {
+  //   //Not necessary. used to make sure the data expected matches the type of User[]
+  //   this.http.get<User[]>(`${this.usersUrl}`).subscribe((users) => {
+  //     this.users = users;
+  //   });
+  // }
 
-  
   /** POST: add a new user to the database */
   addUser(user: any): Observable<User> {
     // const { username, email, password} = user
-    console.log("from the service");
+    console.log('from the service');
     return this.http
       .post<User>(`${this.usersUrl}`, user, this.httpOptions)
       .pipe(
-        tap((newUser: User) => console.log(`added hero w/ username=${newUser.username}`)),
-        catchError(this.handleError<User>('addUser')))
-      
+        tap((newUser: User) =>
+          console.log(`added user w/ username=${newUser.username}`)
+        ),
+        catchError(this.handleError<User>('addUser'))
+      );
   }
 
   /**

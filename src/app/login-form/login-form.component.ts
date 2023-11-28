@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from '../login.service';
@@ -8,44 +13,41 @@ import { LoginService } from '../login.service';
 @Component({
   selector: 'app-login-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
     RouterLink,
     RouterLinkActive,
-    HttpClientModule,],
+    HttpClientModule,
+  ],
   templateUrl: './login-form.component.html',
-  styleUrl: './login-form.component.css'
+  styleUrl: './login-form.component.css',
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent {
+  user: any;
 
-  user : any;
-
-  constructor(private loginService: LoginService) {
-    
-  }
+  constructor(private loginService: LoginService) {}
   userLoginInfo = new FormGroup({
-    username: new FormControl('', [
-      Validators.required]),
-    password: new FormControl('', [
-      Validators.required]),
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
   });
 
   ngOnInit(): void {
-    
   }
   submitted = false;
 
-  loginDiv = true; 
+  loginDiv = true;
 
-  toggleLogin(){
+  toggleLogin() {
     this.loginDiv = !this.loginDiv;
   }
 
   loginOnSubmit() {
-    this.loginDiv = true
-    let userInfo = this.userLoginInfo.value
-    let username = this.userLoginInfo.value.username
-    let password = this.userLoginInfo.value.password
-    console.log("in the component ", username);
+    this.loginDiv = true;
+    let userInfo = this.userLoginInfo.value;
+    let username = this.userLoginInfo.value.username;
+    let password = this.userLoginInfo.value.password;
+    console.log('in the component ', username);
     console.warn(this.userLoginInfo.value.username);
 
     // TODO: Use EventEmitter with form value
@@ -54,12 +56,11 @@ export class LoginFormComponent implements OnInit {
     // You trigger the event by clicking a button with submit
     // console.warn(this.userSignUpInfo.value);
 
-    this.loginService.getUser(username).subscribe(user => {
-      this.user = user
-    })
-    
-    // to clear input after submitting
-      this.userLoginInfo.reset()
-  }
+    this.loginService.getUser(username).subscribe((user) => {
+      this.user = user;
+    });
 
+    // to clear input after submitting
+    this.userLoginInfo.reset();
+  }
 }

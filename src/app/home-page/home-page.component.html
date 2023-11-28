@@ -1,12 +1,13 @@
 <header class="header">
   <h1 ><a routerLink="home" routerLinkActive="active" ariaCurrentWhenActive="page">{{ title }}</a></h1>
-
     <app-header></app-header>
   </header>
-  <main class="main">
+  <nav>
     <div class="signup-login-div">
       <app-signup-login-form></app-signup-login-form>
     </div>
+  </nav>
+  <main class="main">
     <div class="weather-info">
       <div class="left-current">
         <h2>Current Weather</h2>
