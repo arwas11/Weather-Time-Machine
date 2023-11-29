@@ -1,27 +1,67 @@
-# WeatherJamaisVu
+# Weather Jamais Vu 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0.
+Weather Jamais Vu is a TypeScript/JavaScript weather app that shows the difference between current and past weather conditions in a given city. 
 
-## Development server
+This app was built using Angular and Typescript for the client-side and Node.js, Express.js, Sqlite, Sequelize for the server-side. I also used Bootstrap to style the app.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This is a full-stack version to a front-end app that I originally built using React. My goal behind building this app is to enable the user to compare weather conditions and show how climate change has been affecting our planet (hence the Jamais vu).
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Poject Demo
 
-## Build
+This app was deployed on Render:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Project Screenshots
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+## Installation
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1 - Fork or clone this repository to your local machine using your IDE terminal (I use VS Code)
+
+2 - Use the Node package manager [npm](https://www.npmjs.com/) to install Weather Jamais Vu's dependencies by using this command:
+```bash
+npm install
+```
+
+3 - to run the client and the server concurrently, use the following command:
+```bash
+npm run code
+```
+
+4 - to run the client side only, use the following command:
+```bash
+ng serve
+```
+
+5 - to run the server side only, use the following command:
+```bash
+npm run server-dev
+```
+
+## Usage
+
+Features available to all visitors:
+- To get the current weather data for a given city, type the city name inside the Current Weather input. 
+- To see or compare past weather conditions with current weather one in a, input a date in the Pas Weather section. Due to the past weather API limitations, only weather data for dates that are within the past 40 years and 5 days prior to the current date are available.
+- Read comments added by registered users.
+- Sign up
+- Submit a feedback
+
+Features available to registered users: 
+- Log in
+- Add/Edit/Delete a comment
+- Like other comments
+- Delete account
+- Add searched data to a saved list Save a search 
+- Remove from saved list
+- Search data in saved list
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
