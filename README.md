@@ -65,3 +65,8 @@ Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
+
+## Credits
+- Historical Weather API [Open-Meteo](https://open-meteo.com/),
+- Current Weather API [OpenWeather](https://open-meteo.com/),
+-  [date-fns](https://date-fns.org/)
