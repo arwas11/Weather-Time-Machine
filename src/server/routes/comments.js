@@ -9,7 +9,8 @@ const commentsRouter = Router();
 //GET all comments
 commentsRouter.get("/", async (req, res, next) => {
     try {
-      const comments = await Comment.findAll({include: User});
+      // const comments = await Comment.findAll({include: User});
+      const comments = await Comment.findAll();
       if (!comments) {
         throw new Error("no comments found");
       }
@@ -23,7 +24,8 @@ commentsRouter.get("/", async (req, res, next) => {
   commentsRouter.get("/:id", async (req, res, next) => {
     const id = req.params.id;
     try {
-      const comment = await Comment.findOne({ where: { id: id }}, { include: User });
+      // const comment = await Comment.findOne({ where: { id: id }}, { include: User });
+      const comment = await Comment.findOne({ where: { id: id }});
       if (!comment) {
         throw new Error("no comment found");
       }
@@ -52,7 +54,8 @@ commentsRouter.get("/", async (req, res, next) => {
         if (!errors.isEmpty()) {
           res.json({ errors: errors.array() });
         } else {
-    const comment = await Comment.findOne( {where: { id: id }}, { include: User });
+    // const comment = await Comment.findOne( {where: { id: id }}, { include: User });
+    const comment = await Comment.findOne( {where: { id: id }});
           if (!comment) {
             throw new Error(`no comment found`);
           }
@@ -80,7 +83,8 @@ commentsRouter.get("/", async (req, res, next) => {
         if (!errors.isEmpty()) {
           res.json({ errors: errors.array() });
         } else {
-          const comment = await Comment.findOne({where: { id: id }}, { include: User });
+          // const comment = await Comment.findOne({where: { id: id }}, { include: User });
+          const comment = await Comment.findOne({where: { id: id }});
           await Comment.update(req.body);
           res.json(comment);
         }

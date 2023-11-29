@@ -35,7 +35,8 @@ usersRouter.get("/:username", async (req, res, next) => {
 usersRouter.get("/:username/comments", async (req, res, next) => {
   const username = req.params.username;
   try {
-    const user = await User.findOne({ where: { username: username } }, { include: Comment });
+    // const user = await User.findOne({ where: { username: username } }, { include: Comment });
+    const user = await User.findOne({ where: { username: username } });
     const userComments = await User.getComments();
     if (!user) {
       throw new Error("no user found");
@@ -54,8 +55,10 @@ usersRouter.put("/:username/shows/:commentId", async (req, res, next) => {
   const commentId = req.params.commentId;
 
   try {
-    const comment = await Comment.findOne({ where: { commentId: commentId } }, { include: User });
-    const user = await User.findOne({ where: { username: username } }, { include: Comment });
+    // const comment = await Comment.findOne({ where: { commentId: commentId } }, { include: User });
+    // const user = await User.findOne({ where: { username: username } }, { include: Comment });
+    const comment = await Comment.findOne({ where: { commentId: commentId } });
+    const user = await User.findOne({ where: { username: username } });
     await user.addComment(comment);
     const userComments = await User.getComments();
     res.json(userComments);

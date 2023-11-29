@@ -13,11 +13,11 @@ const seed = async () => {
     const comments =
   await Promise.all(commentData.map(comment => Comment.create(comment)))
   // associate some data
-    await Promise.all([
-      users[0].addComment(comments[0]),
-      users[1].addComment(comments[1]),
-      users[2].addComment(comments[2]),
-    ])
+    // await Promise.all([
+    //   users[0].addComment(comments[0]),
+    //   users[1].addComment(comments[1]),
+    //   users[2].addComment(comments[2]),
+    // ])
 
   console.log("User and Comment database info populated!");
 };
