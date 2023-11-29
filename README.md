@@ -10,10 +10,7 @@ This is a full-stack version to a front-end app that I originally built using Re
 ## Poject Demo
 
 This app was deployed on Render:
-![Screenshot 2023-11-28 7 09 46 PM]()
 
-
-![Screenshot 2023-11-28 7 09 32 PM]()
 
 ## Project Screenshots
 Website:
