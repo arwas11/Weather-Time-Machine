@@ -17,9 +17,11 @@ This app was deployed on Render:
 
 ## Project Screenshots
 Website:
+
 ![Weather Jamais Vu website](https://github.com/arwas11/Weather-App/assets/146148342/d529ea71-2128-406b-8edd-23e3d096d4e8)
 
 Wireframe:
+
 ![home page wireframe](https://github.com/arwas11/Weather-App/assets/146148342/59d422c5-0ff1-434f-9b63-c5dea45482ea)
 ![profile page wireframe](https://github.com/arwas11/Weather-App/assets/146148342/5c06f0e5-6a58-4d9c-8e56-4d6af563977f)
 ![contact us page wireframe](https://github.com/arwas11/Weather-App/assets/146148342/14660450-f0d8-4881-aa52-b07fd4f638e6)
