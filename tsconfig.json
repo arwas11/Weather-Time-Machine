@@ -30,7 +30,5 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  },
-    "include": ["client/src/**/*", "tests/**/*"],
-    "exclude": ["backend/**/*"]
+  }
 }
