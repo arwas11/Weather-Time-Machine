@@ -10,7 +10,7 @@
     "server-dev": "nodemon src/server/index.js",
     "seed": "cd src/server/db && node seed.js",
     "code": "concurrently \"npm start\" \"npm run server-dev\"",
-    "dev": "lite-server"
+    "dev": "lite-server dist/out-tsc"
   },
   "private": true,
   "dependencies": {
@@ -24,6 +24,7 @@
     "@angular/platform-server": "^17.0.0",
     "@angular/router": "^17.0.0",
     "@angular/ssr": "^17.0.0",
+    "@babel/preset-env": "^7.23.5",
     "@ngrx/store": "^17.0.0",
     "@types/bootstrap": "^5.2.10",
     "bootstrap": "^5.3.2",

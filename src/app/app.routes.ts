@@ -8,32 +8,33 @@ import { SavedListComponent } from './saved-list/saved-list.component';
 
 
 export const routes: Routes = [
+    // {
+    //     path: 'home',
+    //     title: 'home-page',
+    //     component: HomePageComponent,
+    // },
+    // {
+    //     path: 'signup-login',
+    //     title: 'signup-login',
+    //     component: SignupLoginFormComponent,
+    // },
+    // {
+    //     path: 'user-profile',
+    //     title: '--user-- profile',
+    //     component: UserProfileComponent,
+    // },
+    // {
+    //     path: 'saved-list',
+    //     title: 'saved-list',
+    //     component: SavedListComponent,
+    // },
+    // {
+    //     path: 'saved-list/:city',
+    //     title: '--saved item--',
+    //     component: SavedListComponent,
+    // },
     {
-        path: 'home',
-        title: 'home-page',
-        component: HomePageComponent,
-    },
-    {
-        path: 'signup-login',
-        title: 'signup-login',
-        component: SignupLoginFormComponent,
-    },
-    {
-        path: 'user-profile',
-        title: '--user-- profile',
-        component: UserProfileComponent,
-    },
-    {
-        path: 'saved-list',
-        title: 'saved-list',
-        component: SavedListComponent,
-    },
-    {
-        path: 'saved-list/:city',
-        title: '--saved item--',
-        component: SavedListComponent,
-    },
-    {
-        path: '**', component: HomePageComponent 
+        path: '**', 
+        component: HomePageComponent 
     }
 ];
