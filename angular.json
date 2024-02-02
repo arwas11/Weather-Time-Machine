@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "weather-jamais-vu": {
+    "current-past-weather": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/weather-jamais-vu",
+            "outputPath": "dist/current-past-weather",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -56,10 +56,10 @@
           },
           "configurations": {
             "production": {
-              "buildTarget": "weather-jamais-vu:build:production"
+              "buildTarget": "current-past-weather:build:production"
             },
             "development": {
-              "buildTarget": "weather-jamais-vu:build:development"
+              "buildTarget": "current-past-weather:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -67,7 +67,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "weather-jamais-vu:build"
+            "buildTarget": "current-past-weather:build"
           }
         },
         "test": {
