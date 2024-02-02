@@ -8,11 +8,11 @@ import { SavedListComponent } from './saved-list/saved-list.component';
 
 
 export const routes: Routes = [
-    // {
-    //     path: 'home',
-    //     title: 'home-page',
-    //     component: HomePageComponent,
-    // },
+    {
+        path: 'current-past-weather',
+        title: 'current-past-weather',
+        component: HomePageComponent,
+    },
     // {
     //     path: 'signup-login',
     //     title: 'signup-login',
@@ -35,6 +35,7 @@ export const routes: Routes = [
     // },
     {
         path: '**', 
+        title: "current-past-weather",
         component: HomePageComponent 
     }
 ];

@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'weather-jamais-vu' title`, () => {
+  it(`should have the 'current-past-weather' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('weather-jamais-vu');
+    expect(app.title).toEqual('current-past-weather');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, weather-jamais-vu');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, current-past-weather');
   });
 });

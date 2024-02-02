@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 
 export class AddCommentsService {
 
-  commentsUrl = 'http://localhost:300/Comments'
+  commentsUrl = 'http://localhost:3000/comments'
   comments: Comment[] = []
   // comment: Comment;
 

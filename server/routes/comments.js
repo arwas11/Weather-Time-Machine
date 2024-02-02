@@ -39,7 +39,7 @@ commentsRouter.get("/", async (req, res, next) => {
   
   // PUT update comment's text
   commentsRouter.put(
-    "/:id/update-text",
+    "/:id",
     [
       check("text")
         .not()

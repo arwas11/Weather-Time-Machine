@@ -1,10 +1,10 @@
-# Weather Jamais Vu 
+# Current & Past Weather 
 
-Weather Jamais Vu is a TypeScript/JavaScript weather app that shows the difference between current and past weather conditions in a given city. 
+Current & Past Weather is a TypeScript/JavaScript weather app that shows the difference between current and past weather conditions in a given city. 
 
 This app was built using Angular and Typescript for the client-side and Node.js, Express.js, Sqlite, Sequelize for the server-side. I also used Bootstrap to style the app.
 
-This is a full-stack version to a front-end app, [Compare Weather Conditions](https://github.com/ArwaSharif/CompareWeatherConditions), that I originally built using React. My goal behind building this app is to enable the user to compare weather conditions and show how climate change has been affecting our planet (hence the Jamais vu).
+This is a full-stack version to a front-end app, [Compare Weather Conditions](https://github.com/ArwaSharif/CompareWeatherConditions), that I originally built using React. My goal behind building this app is to enable the user to compare weather conditions and show how climate change has been affecting our planet.
 
 
 ## Poject Demo
@@ -15,7 +15,7 @@ This app was deployed on Render:
 ## Project Screenshots
 Website:
 
-![Weather Jamais Vu website](https://github.com/arwas11/Weather-App/assets/146148342/d529ea71-2128-406b-8edd-23e3d096d4e8)
+![Current & Past Weather website](https://github.com/arwas11/Weather-App/assets/146148342/d529ea71-2128-406b-8edd-23e3d096d4e8)
 
 Wireframe:
 
@@ -27,7 +27,7 @@ Wireframe:
 
 1 - Fork or clone this repository to your local machine using your IDE terminal (I use VS Code)
 
-2 - Use the Node package manager [npm](https://www.npmjs.com/) to install Weather Jamais Vu's dependencies by using this command:
+2 - Use the Node package manager [npm](https://www.npmjs.com/) to install Current & Past Weather's dependencies by using this command:
 ```bash
 npm install
 ```

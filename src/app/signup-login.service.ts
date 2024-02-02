@@ -8,7 +8,7 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class SignupLoginService {
-  usersUrl = 'http://localhost:3000/users';
+  usersUrl = 'http://localhost:3000/api/users';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

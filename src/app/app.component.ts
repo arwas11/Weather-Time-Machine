@@ -19,5 +19,5 @@ import { HomePageComponent } from './home-page/home-page.component';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'Weather Jamais Vu';
+  title = 'Current & Past Weather';
 }

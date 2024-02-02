@@ -29,5 +29,5 @@ import { LoginFormComponent } from '../login-form/login-form.component';
   styleUrl: './home-page.component.css',
 })
 export class HomePageComponent {
-  title = 'Weather Jamais Vu';
+  title = 'Current & Past Weather';
 }
