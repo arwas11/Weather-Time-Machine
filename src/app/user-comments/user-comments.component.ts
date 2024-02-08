@@ -43,8 +43,8 @@ export class UserCommentsComponent implements OnInit {
       return;
     }
     console.log(comment);
-    console.log(comment);
-    this.userCommentsService.addComment(comment).subscribe((comment) => {
+    this.userCommentsService.addComment(comment)
+    .subscribe((comment) => {
       console.log('new comment submit', comment);
       this.comment[0] = comment;
     });

@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const { Comment, User } = require("../models");
 const { check, validationResult } = require("express-validator");
+const userAuth = require("../middleware/userAuth");
 // const { lengthChecker } = require("../middleware/lengthChecker");
 
 const commentsRouter = Router();
@@ -19,25 +20,27 @@ commentsRouter.get("/", async (req, res, next) => {
   }
 });
 
-//GET one comment
-commentsRouter.get("/:id", async (req, res, next) => {
-  const id = req.params.id;
-  try {
-    // const comment = await Comment.findOne({ where: { id: id }}, { include: User });
-    const comment = await Comment.findOne({ where: { id: id } });
-    if (!comment) {
-      throw new Error("no comment found");
-    }
-    res.json(comment);
-  } catch (err) {
-    next(err);
-  }
-});
+// need user as  author Auth
+//GET user's comments
+// commentsRouter.get("/", async (req, res, next) => {
+//   const id = req.params.id;
+//   try {
+//     // const comment = await Comment.findOne({ where: { id: id }}, { include: User });
+//     const comment = await Comment.findOne({ where: { id: id } });
+//     if (!comment) {
+//       throw new Error("no comment found");
+//     }
+//     res.json(comment);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
+// need user as  author Auth
 // PUT update comment's text
 commentsRouter.put(
   "/:id",
-  [check("text").not().isEmpty().withMessage("please edit the comment").trim()],
+  [userAuth, check("text").not().isEmpty().withMessage("please edit the comment").trim()],
   async (req, res, next) => {
     const id = req.params.id;
     const editText = req.body;
@@ -70,22 +73,22 @@ commentsRouter.put(
 commentsRouter.post(
   "/",
   //check express validator
-  [check("text").not().isEmpty().trim().isString()],
+  [userAuth, check("text").not().isEmpty().trim().isString()],
   async (req, res, next) => {
     const newText = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.json({ error: errors.isEmpty() });
+      res.status(400).json({ error: errors.isEmpty() });
       // a better error handling??
       // res.send(`comment cannot be empty`);
     } else {
       try {
         if (newText.text.toString().length > 50) {
-          res.send("Invalid: comment must be less than 50 character");
+          res.status(400).send("Invalid: comment must be less than 50 character");
         } 
         const newComment = await Comment.create(newText);
-        // console.log("this is the added comment ", newComment);
-        res.send(`You successfully added a new comment!
+        console.log("this is the added comment ", newComment);
+        res.status(201).send(`You successfully added a new comment!
       "${newComment.text}"
       `);
       } catch (error) {

@@ -23,7 +23,7 @@ export class CommentsService {
 
   getComments() {
     //Not necessary. used to make sure the data expected matches the type of Comment[]
-    this.http.get<Comment[]>(`${this.commentsUrl}`).subscribe((comments) => {
+          this.http.get<Comment[]>(`${this.commentsUrl}`).subscribe((comments) => {
       console.log('these are comments', comments);
       if (comments) {
         this.comments = comments;
@@ -32,7 +32,7 @@ export class CommentsService {
   }
   /** POST: add a new comment to the database */
   addComment(comment: any): Observable<Comment> {
-    return this.http.post<Comment>(this.commentsUrl, comment, this.httpOptions).pipe(
+    return this.http.post<Comment>(this.commentsUrl, comment).pipe(
       tap((newComment: Comment) => console.log(`added comment w/ id=${newComment.id}`)),
       catchError(this.handleError<Comment>('addComment'))
     );

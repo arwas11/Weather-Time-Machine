@@ -1,31 +1,67 @@
+require("dotenv").config();
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const { Router } = require("express");
 const { User, Comment } = require("../models");
 const { check, validationResult } = require("express-validator");
+const basicAuth = require("../middleware/basicAuth");
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const usersRouter = Router();
 
 // GET /users
-usersRouter.get("/", async (req, res, next) => {
+usersRouter.get("/", basicAuth, async (req, res, next) => {
   try {
     const users = await User.findAll();
     if (!users) {
-        throw new Error("no users found");
-      }
+      throw new Error("no users found");
+    }
     res.json(users);
   } catch (error) {
     next(error);
   }
 });
 
-// GET user/:username
-usersRouter.get("/:username", async (req, res, next) => {
-  username = req.params.username
+// GET user log in 
+usersRouter.get("/login", [
+  // check("username").notEmpty().trim().isString(),
+  // check("password").not().isEmpty().isString(),
+  basicAuth,
+],async (req, res, next) => {
+  const {username, password} = req.user;
   try {
-    const found = await User.findOne({ where: { username: username } });
-    if (!found) {
-        throw new Error("no user found");
-      }
-    res.json(found);
+        //get user info from db
+    const foundUser = await User.findOne({ where: { username: username } });
+
+    if (!foundUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // compare the provided password with the hashed password from the db
+    const comparePassword = await bcrypt.compare(
+      password,
+      foundUser.password
+    );
+
+    if (!comparePassword) {
+      return res.status(401).json({ error: "Incorrect password" });
+    } else {
+       // USER STORY: The user provides their username and password to authenticate and receives a token in exchange
+      //make a payload
+      const payload = { id: foundUser.id, username: foundUser.username};
+
+      // sign and encode the payload to create the token
+      const accessToken = jwt.sign(payload, JWT_SECRET, {expiresIn: "24h"});
+
+      // don't send back the hashed password
+      // res.json({ id: foundUser.id, email: foundUser.email });
+
+      // res.json({accessToken})
+      res.status(202).send(`welcome back, ${foundUser.username}!
+      TOKEN: ${accessToken}`);
+    }
+
+    res.json(foundUser);
   } catch (err) {
     next(err);
   }
@@ -68,28 +104,37 @@ usersRouter.put("/:username/shows/:commentId", async (req, res, next) => {
 });
 //=====
 
-// POST new user
+// POST create new user account
 usersRouter.post(
-  "/",
+  "/register",
   [
-    check("username").not().isEmpty().trim().isString(),
-    //validate email?
-    check("email").not().isEmpty().trim().isString(),
-    check("password").not().isEmpty().isString(),
+    // check("username").notEmpty().trim().isString(),
+    // check("password").not().isEmpty().isString(),
+    basicAuth,
   ],
   async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      res.json({ error: errors.array() });
-    } else {
+    // const errors = validationResult(req).throw();
+    // if (!errors.isEmpty()) {
+    //   res.status(401).json({ error: errors.mapped() }); // TRY "Please enter a valid username and password"
+    //   next;
+    // } else {
       try {
-        const createdUser = await User.create(req.body);
-        console.log("this is the added user ", createdUser);
-        res.json(createdUser);
+        // get the user data from basicAuth middleware
+        const { username, password } = req.user;
+        // hash the password
+        const saltRounds = 13;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+        const newUser = await User.create({
+          username,
+          password: hashedPassword,
+        });
+        console.log("this is the added user ", newUser);
+        res.status(201).send(`Successfully created new account with username: ${newUser.username}!`);
       } catch (err) {
         next(err);
       }
-    }
+    // }
   }
 );
 
