@@ -5,16 +5,18 @@ const { Router } = require("express");
 const { User, Comment } = require("../models");
 const { check, validationResult } = require("express-validator");
 const basicAuth = require("../middleware/basicAuth");
+const userAuth = require("../middleware/userAuth");
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const usersRouter = Router();
 
-// GET /users
-usersRouter.get("/", basicAuth, async (req, res, next) => {
+// GET ALL USERS
+// Admin only
+usersRouter.get("/", userAuth, async (req, res, next) => {
   try {
-    const users = await User.findAll();
-    if (!users) {
-      throw new Error("no users found");
+    const users = await User.findAll({include: Comment});
+    if (!users || users.length === 0) {
+      return res.status(201).send(`No registered users`)
     }
     res.json(users);
   } catch (error) {
@@ -22,7 +24,8 @@ usersRouter.get("/", basicAuth, async (req, res, next) => {
   }
 });
 
-// GET user log in 
+//LOGIN
+// GET user
 usersRouter.get("/login", [
   // check("username").notEmpty().trim().isString(),
   // check("password").not().isEmpty().isString(),
@@ -66,24 +69,72 @@ usersRouter.get("/login", [
     next(err);
   }
 });
+
+
+// LOGOUT
+// delete token to apply
+// usersRouter.get("/logout", [
+//   // check("username").notEmpty().trim().isString(),
+//   // check("password").not().isEmpty().isString(),
+//   userAuth,
+// ],async (req, res, next) => {
+//   const {username, password} = req.user;
+//   try {
+//         //get user info from db
+//     const foundUser = await User.findOne({ where: { username: username } });
+
+//     if (!foundUser) {
+//       return res.status(404).json({ error: "User not found" });
+//     }
+
+//     // compare the provided password with the hashed password from the db
+//     const comparePassword = await bcrypt.compare(
+//       password,
+//       foundUser.password
+//     );
+
+//     if (!comparePassword) {
+//       return res.status(401).json({ error: "Incorrect password" });
+//     } else {
+//        // USER STORY: The user provides their username and password to authenticate and receives a token in exchange
+//       //make a payload
+//       const payload = { id: foundUser.id, username: foundUser.username};
+
+//       // sign and encode the payload to create the token
+//       const accessToken = jwt.sign(payload, JWT_SECRET, {expiresIn: "24h"});
+
+//       // don't send back the hashed password
+//       // res.json({ id: foundUser.id, email: foundUser.email });
+
+//       // res.json({accessToken})
+//       res.status(202).send(`welcome back, ${foundUser.username}!
+//       TOKEN: ${accessToken}`);
+//     }
+
+//     res.json(foundUser);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
 //=====
 //GET all comments posted by a user (username in req.params)
-usersRouter.get("/:username/comments", async (req, res, next) => {
-  const username = req.params.username;
-  try {
-    // const user = await User.findOne({ where: { username: username } }, { include: Comment });
-    const user = await User.findOne({ where: { username: username } });
-    const userComments = await User.getComments();
-    if (!user) {
-      throw new Error("no user found");
-    } else if (!userComments.length) {
-      throw new Error("user did not post a comment");
-    }
-    res.json(user.comments);
-  } catch (err) {
-    next(err);
-  }
-});
+// usersRouter.get("/:username/comments", async (req, res, next) => {
+//   const username = req.params.username;
+//   try {
+//     // const user = await User.findOne({ where: { username: username } }, { include: Comment });
+//     const user = await User.findOne({ where: { username: username } });
+//     const userComments = await User.getComments();
+//     if (!user) {
+//       throw new Error("no user found");
+//     } else if (!userComments.length) {
+//       throw new Error("user did not post a comment");
+//     }
+//     res.json(user.comments);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 // PUT associate a user with a comment they have posted
 usersRouter.put("/:username/shows/:commentId", async (req, res, next) => {
@@ -105,6 +156,7 @@ usersRouter.put("/:username/shows/:commentId", async (req, res, next) => {
 //=====
 
 // POST create new user account
+// OR req.oidc.user
 usersRouter.post(
   "/register",
   [
@@ -138,24 +190,41 @@ usersRouter.post(
   }
 );
 
-// PUT update user
+// PUT update username
+// ADD PASSWORD LATER
 usersRouter.put(
   "/:username",
   [
-    check("username").not().isEmpty().trim().isString(),
-    //validate email?
-    check("email").not().isEmpty().trim().isNumeric(),
-    check("password").not().isEmpty().isString(),
+    userAuth,
+    // check("username").not().isEmpty().trim().isString(),
+    // //validate email?
+    // check("email").not().isEmpty().trim().isNumeric(),
+    // check("password").not().isEmpty().isString(),
   ],
   async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      res.json({ error: errors.array() });
-    } else {
-      try {
-        await User.update(req.body, {
-          where: { username: req.params.username },
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //   res.json({ error: errors.array() });
+    // } else {
+    const {username, password} = req.body  
+    try {
+
+      //update username
+      const foundUser = await User.findOne({ where: { username: username } });
+      if (username !== foundUser.username){
+        const updatedUser = await User.update(req.body, {
+          where: { username: username },
         });
+        res.status(201).send(`Succssful username update to ${updatedUser.username} `)
+      }
+
+      //update password
+      // if (password !== foundUser.password){
+      //   await User.update(req.body, {
+      //     where: { username: username },
+      //   });
+      // }
+
         const find = await User.findOne({
           where: { username: req.params.username },
         });
@@ -163,17 +232,21 @@ usersRouter.put(
       } catch (err) {
         next(err);
       }
-    }
   }
 );
 
-// DELETE user by ID
-usersRouter.delete("/:username", async (req, res, next) => {
+// DELETE user by username
+//only Admin or User
+usersRouter.delete("/:username", basicAuth, async (req, res, next) => {
   try {
-    await User.destroy({ where: { id: req.params.username } });
-    const find = await User.findAll();
-    res.json(find);
-  } catch (err) {
+    const username = re.params.username;
+    const foundUser = await User.findOne({where: {username: username}});
+    if (!foundUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    await User.destroy({ where: { username: username } });
+    res.status(201).send(`Account with username: ${foundUser.username} has been deleted permanently!`)
+    } catch (err) {
     next(err);
   }
 });

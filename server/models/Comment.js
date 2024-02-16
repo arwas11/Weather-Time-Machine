@@ -1,16 +1,16 @@
-const {db, Model, DataTypes} = require('../db/connection')
-const User = require('./User')
+const { db, Model, DataTypes } = require("../db/connection");
+const User = require("./User");
 
+class Comment extends Model {}
 
-class Comment extends Model {};
-
-Comment.init({
-    text: DataTypes.STRING(50),
-},{
+Comment.init(
+  {
+    text: { type: DataTypes.STRING(50), allowNull: false },
+  },
+  {
     sequelize: db,
-    modelName: "Comment"
-})
+    modelName: "Comment",
+  }
+);
 
-// Comment.hasOne(User)
-
-module.exports = Comment
+module.exports = Comment;
