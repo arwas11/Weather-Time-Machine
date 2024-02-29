@@ -1,21 +1,21 @@
-# Weather Jamais Vu 
+# Weather Time Machine 
 
-Weather Jamais Vu is a TypeScript/JavaScript weather app that shows the difference between current and past weather conditions in a given city. 
+Weather Time Machine is a TypeScript/JavaScript weather app that explores past and present weather conditions in a given city. 
 
-This app was built using Angular and Typescript for the client-side and Node.js, Express.js, Sqlite, Sequelize for the server-side. I also used Bootstrap to style the app.
+This app was built using Angular and Typescript for the client-side and Node.js, Express.js, Sqlite, Sequelize for the server-side. It also utilizes Bootstrap for styling.
 
-This is a full-stack version to a front-end app, [Compare Weather Conditions](https://github.com/ArwaSharif/CompareWeatherConditions), that I originally built using React. My goal behind building this app is to enable the user to compare weather conditions and show how climate change has been affecting our planet (hence the Jamais vu).
+This is a full-stack version to a front-end app that I originally built using React. My goal behind building this app is to evoke a sense of exploration and discovery through the app and show how climate change has been affecting our planet.
 
 
-## Poject Demo
+## Project Deployment
 
-This app was deployed on Render:
+This app will be deployed on Render. The link to the deployed will be add soon.
 
 
 ## Project Screenshots
 Website:
 
-![Weather Jamais Vu website](https://github.com/arwas11/Weather-App/assets/146148342/d529ea71-2128-406b-8edd-23e3d096d4e8)
+![Weather Time Machine website](https://github.com/arwas11/Weather-App/assets/146148342/d529ea71-2128-406b-8edd-23e3d096d4e8)
 
 Wireframe:
 
@@ -25,9 +25,9 @@ Wireframe:
 
 ## Installation
 
-1 - Fork or clone this repository to your local machine using your IDE terminal (I use VS Code)
+1 - Fork or directly clone this repository to your local machine using your IDE terminal (I use VS Code).
 
-2 - Use the Node package manager [npm](https://www.npmjs.com/) to install Weather Jamais Vu's dependencies by using this command:
+2 - Use the Node package manager [npm](https://www.npmjs.com/) to install Weather Time Machine's dependencies by using this command:
 ```bash
 npm install
 ```
@@ -52,18 +52,18 @@ npm run server-dev
 Features available to all visitors:
 - To get the current weather data for a given city, type the city name inside the Current Weather input field. 
 - To see past weather conditions, input a date in the Past Weather section. *Due to the past weather API limitations, only weather data for dates that are within the past 40 years and 5 days prior to the current date are available.
-- Read comments added by registered users.
-- Sign up
-- Submit a feedback
+- Read comments posted by registered users.
+- Sign up & Log in
+- Submit a feedback (to be added)
 
 Features available to registered users only: 
 - Log in
 - Add/Edit/Delete a comment
-- Like other comments
-- Delete account
-- Add searched data to a saved list 
-- Remove from saved list
-- Search data in saved list
+- Like and remove a like from a comment
+- Delete account (to be added)
+- Add searched data to a saved list (to be added)
+- Remove from saved list (to be added)
+- Search data in saved list (to be added)
 
 ## Contributing
 
