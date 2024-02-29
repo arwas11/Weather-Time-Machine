@@ -1,10 +1,6 @@
-// const express = require("express");
-// const dotenv = require("dotenv");
 const { db } = require("./db/connection");
 const app = require("./app");
-// app = express();
 
-// dotenv.config();
 const PORT = 3000;
 
 const init = async () => {

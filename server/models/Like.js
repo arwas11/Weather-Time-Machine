@@ -1,10 +1,11 @@
 const { db, Model, DataTypes } = require("../db/connection");
+const User = require("./User");
+const Comment = require("./Comment");
 
 class Like extends Model {}
 
 Like.init(
   {
-    Like: DataTypes.NUMBER,
   },
   {
     sequelize: db,

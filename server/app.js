@@ -7,7 +7,8 @@ const path = require("path");
 const cors = require("cors");
 const usersRouter = require("./routes/users");
 const commentsRouter = require("./routes/comments");
-
+const likesRouter = require("./routes/likes");
+const weatherDataRouter = require("./routes/weatherData");
 
 //Allow CORS requests
 app.use(cors());
@@ -23,43 +24,13 @@ app.use(express.static(path.join(__dirname, "../dist")));
 // routers
 app.use("/users", usersRouter);
 app.use("/comments", commentsRouter);
-
-// app.get("/", async (req, res, next) => {
-//   try {
-//     const users = await User.create({
-//       username: "test1",
-//       email: "test1@test",
-//       password: "test1122"
-//     });
-    // if (!users) {
-    //     throw new Error("no users found");
-    //   }
-//     console.log(users)
-//     res.json(users);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+// app.use("/weatherData", weatherDataRouter);
 
 // // 404 handler
 // app.use((req, res) => {
-//   res
-//     .status(404)
-//     .send({
-//       error: "404 - Not Found",
-//       message: "No route found for the requested URL",
-//     });
-// });
-
-// // error handling middleware
-// app.use((error, req, res, next) => {
-//   console.error("SERVER ERROR: ", error);
-//   if (res.statusCode < 400) res.status(500);
-//   res.send({
-//     error: error.message,
-//     name: error.name,
-//     message: error.message,
-//     table: error.table,
+//   res.status(404).send({
+//     error: "404 - Not Found",
+//     message: "No route found for the requested URL",
 //   });
 // });
 
