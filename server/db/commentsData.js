@@ -1,22 +1,21 @@
-module.exports = { commentData: 
-[
+const commentData = [
     {
-      "text": "this is interesting"
+      "text": "this is interesting!",
+      "UserId": 1
     },
     {
-      "text": "chicago's winter is warmer now than it was 10 years ago"
+      "text": "chicago's winter felt like summer this year",
+      "UserId": 2
+
     },
     {
-      "text": "this is great"
+      "text": "climate change is really affecting the planet",
+      "UserId": 3
     },
     {
-      "text": "this is interesting"
-    },
-    {
-      "text": "chicago's winter is warmer now than it was 10 years ago"
-    },
-    {
-      "text": "this is great"
+      "text": "this is great",
+      "UserId": 2
     }
 ]
-}
+
+module.exports = {commentData}

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "current-past-weather": {
+    "weather-time-machine": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/current-past-weather",
+            "outputPath": "dist/weather-time-machine",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -56,10 +56,10 @@
           },
           "configurations": {
             "production": {
-              "buildTarget": "current-past-weather:build:production"
+              "buildTarget": "weather-time-machine:build:production"
             },
             "development": {
-              "buildTarget": "current-past-weather:build:development"
+              "buildTarget": "weather-time-machine:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -67,7 +67,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "current-past-weather:build"
+            "buildTarget": "weather-time-machine:build"
           }
         },
         "test": {

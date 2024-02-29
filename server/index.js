@@ -1,17 +1,36 @@
-const { db } = require("./db/connection");
-const app = require("./app");
+// load environment variables from .env or elsewhere
+require("dotenv").config();
+const express = require("express");
+const app = express();
+const morgan = require("morgan");
+const path = require("path");
+const cors = require("cors");
+const usersRouter = require("./routes/users");
+const commentsRouter = require("./routes/comments");
+const weatherDataRouter = require("./routes/weatherData");
 
-const PORT = 3000;
+//Allow CORS requests
+app.use(cors());
+// logging middleware
+app.use(morgan("dev"));
+// parsing middleware for form input data & json
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
-const init = async () => {
-  try {
-    app.listen(PORT, () => {
-      db.sync();
-      console.log(`Server listening at http://localhost:${PORT}`);
-    });
-  } catch (error) {
-    console.error("Error starting server:", error);
-  }
-};
+// serve up static files (e.g. html and css files)
+app.use(express.static(path.join(__dirname, "../dist")));
 
-init();
+// routers
+app.use("/users", usersRouter);
+app.use("/comments", commentsRouter);
+// app.use("/weatherData", weatherDataRouter);
+
+// // 404 handler
+// app.use((req, res) => {
+//   res.status(404).send({
+//     error: "404 - Not Found",
+//     message: "No route found for the requested URL",
+//   });
+// });
+
+module.exports = app;

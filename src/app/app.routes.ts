@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { CurrentWeatherComponent } from './current-weather/current-weather.component';
+import { CurrentWeatherComponent } from './weather-time-machineonent';
 import { PastWeatherComponent } from './past-weather/past-weather.component';
 import { SignupLoginFormComponent } from './signup-login-form/signup-login-form.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -9,8 +9,8 @@ import { SavedListComponent } from './saved-list/saved-list.component';
 
 export const routes: Routes = [
     {
-        path: 'current-past-weather',
-        title: 'current-past-weather',
+        path: 'weather-time-machine',
+        title: 'weather-time-machine',
         component: HomePageComponent,
     },
     // {
@@ -35,7 +35,7 @@ export const routes: Routes = [
     // },
     {
         path: '**', 
-        title: "current-past-weather",
+        title: "weather-time-machine",
         component: HomePageComponent 
     }
 ];

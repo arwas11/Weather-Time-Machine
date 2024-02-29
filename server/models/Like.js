@@ -1,4 +1,4 @@
-const { db, Model, DataTypes } = require("../db/connection");
+const { db, Model, DataTypes } = require("../db/db");
 const User = require("./User");
 const Comment = require("./Comment");
 

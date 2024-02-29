@@ -1,7 +1,7 @@
 const User = require("./User");
 const Comment = require("./Comment");
 const Like = require("./Like");
-const WeatherData = require("./WeatherData");
+// const WeatherData = require("./WeatherData");
 
 // user creates comments
 Comment.belongsTo(User);

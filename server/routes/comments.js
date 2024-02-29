@@ -1,12 +1,12 @@
 const { Router } = require("express");
 const { Comment, User, Like } = require("../models");
-const { check, validationResult } = require("express-validator");
+const { check } = require("express-validator");
 const userAuth = require("../middleware/userAuth");
-// const { lengthChecker } = require("../middleware/lengthChecker");
 
 const commentsRouter = Router();
 
 //GET all comments
+// Admin & User & Visitor
 commentsRouter.get("/", async (req, res, next) => {
   try {
     const comments = await Comment.findAll({
@@ -23,8 +23,8 @@ commentsRouter.get("/", async (req, res, next) => {
     });
 
     if (!comments || comments.length === 0) {
-      // make status 204 which is for no content??
-      res.status(201).send(`No Comments Were Posted Yet`); // No Content (204) for no comments
+      // make status 204 which is for no content?? that will not show res message
+      res.status(200).send(`No Comments Were Posted Yet`); // No Content (204) for no comments
     }
     //The ?. operator is called the optional chaining operator. It allows you to access a property of an object without having to check if the object is null or undefined first. If the object is null or undefined, the ?. operator will return undefined instead of throwing an error.
     const mappedComments = comments.map((comment) => ({
@@ -42,9 +42,11 @@ commentsRouter.get("/", async (req, res, next) => {
 });
 
 //GET all user's comments
+// User
 commentsRouter.get("/my-comments", userAuth, async (req, res, next) => {
   try {
     const { id, username } = req.user;
+
     const foundUser = await User.findOne(
       { where: { username: username } },
       {
@@ -102,7 +104,7 @@ commentsRouter.post(
   [userAuth, check("text").not().isEmpty().trim().isString()],
   async (req, res, next) => {
     const newText = req.body.text;
-    const { id, username } = req.user;
+    const { id, username, role } = req.user;
     if (!newText) {
       res.status(400).send(`comment cannot be empty`);
     } else {
@@ -149,31 +151,43 @@ commentsRouter.post(
 );
 
 //PUT a comment
-commentsRouter.put("/:id", userAuth, async (req, res, next) => {
+// Admin & User
+commentsRouter.put("/:commentId", userAuth, async (req, res, next) => {
   try {
     const { id, username } = req.user;
+    const { commentId } = req.params;
+
+    // Revisit if this code needed
+    if (!commentId) {
+      return res.status(400).send(`Error: Missing comment ID to delete`);
+    }
+
+    const foundUAdmin = await User.findOne({ where: { username: username } });
+
+    if (foundUAdmin.role === "Admin") {
+      const commentToEdit = await Comment.findByPk(commentId);
+
+      if (!commentToEdit) {
+        return res.status(404).send(`Error: enter valid comment id`);
+      }
+
+      await commentToEdit.update({ text: req.body.text });
+
+      res.status(200).send(`Admin successfully edited a comment
+      "${commentToEdit.text}"!`);
+    }
     const foundUser = await User.findOne(
       { where: { username: username } },
       { include: Comment }
     );
 
-    //Revisit if this code needed
-    // if (!req.params.id) {
-    //   return res.status(400).send(`Error: Missing comment ID to delete`);
-    // }
-
-    // if (typeof req.params.id !== "number") {
-    //   return res.status(400).send(`Error: Invalid comment ID`);
-    // }
-
     const findComment = await foundUser.getComments({
-      where: { id: req.params.id },
+      where: { id: commentId },
     });
 
     if (findComment.length === 0 || findComment.length > 1) {
       return res.status(404).send(`Error: enter valid comment id`);
     }
-    // console.log("this is found comment", findComment[0].dataValues.text);
 
     const commentToEdit = await Comment.findOne({
       where: { text: findComment[0].dataValues.text },
@@ -193,18 +207,54 @@ commentsRouter.put("/:id", userAuth, async (req, res, next) => {
 });
 
 //DELETE a comment & its likes
-// user adds a comment id OR UI will have a btn with endpoint w/ correct comment id to delete
-//??? Do we need error handling when no req.params.id.length
-commentsRouter.delete("/:id", userAuth, async (req, res, next) => {
+// Admin & User
+commentsRouter.delete("/:commentId", userAuth, async (req, res, next) => {
   try {
-    const { id, username } = req.user;
-    const commentIdParam = req.params.id;
+    const { id, username, role } = req.user;
+    const { commentId } = req.params;
 
     // Revisit if this code needed
-    if (!commentIdParam) {
+    if (!commentId) {
       return res.status(400).send(`Error: Missing comment ID to delete`);
     }
 
+    const foundUAdmin = await User.findOne({ where: { username: username } });
+
+    if (foundUAdmin.role === "Admin") {
+      //find and verify the comment that matches the req.param
+      const comment = await Comment.findOne(
+        { where: { id: commentIdParam } },
+        {
+          include: [
+            {
+              model: User,
+              attributes: ["username"], // Only fetch relevant User data
+            },
+            {
+              model: Like, // Include associated Likes
+              attributes: ["id"], // Only fetch Like count efficiently (optional)
+            },
+          ],
+        }
+      );
+
+      if (!comment) {
+        return res.status(404).send(`Error: enter valid comment id`);
+      }
+
+      // find and verify the comment has a like or not
+      const findLike = await Like.findAll({ Where: { CommentId: comment.id } });
+      // console.log("this getLikes results", findLike);
+
+      if (findLike.CommentId === comment.id) {
+        await findLike.destroy();
+      }
+
+      const commentToDelete = await comment.destroy();
+
+      res.status(200).send(`Admin successfully deleted this comment
+    "${commentToDelete.text}"!`);
+    }
     //find and verify the comment that matches the req.param
     const comment = await Comment.findOne(
       { where: { id: commentIdParam } },
@@ -240,7 +290,6 @@ commentsRouter.delete("/:id", userAuth, async (req, res, next) => {
     if (!foundUser) {
       return res.status(404).send(`Error: enter valid comment id`);
     }
-    // console.log('this is foundUser',foundUser);
 
     // find and verify the comment has a like or not
     const findLike = await Like.findAll({ Where: { CommentId: comment.id } });
@@ -261,10 +310,10 @@ commentsRouter.delete("/:id", userAuth, async (req, res, next) => {
 
 ///////////////// LIKES //////////////
 
-// GET comments w/ user's likes
+// GET user's liked comments
 // commentsRouter.get("/my-liked-comments", userAuth, async (req, res, next) => {
 //   try {
-//     const { id: userId } = req.user; // Get user ID from authorized data
+//     const { id: userId, role} = req.user; // Get user ID from authorized data
 
 //     const userComments = await Comment.findAll({
 //       where: { userId }, // Filter comments by logged-in user's ID
@@ -289,7 +338,7 @@ commentsRouter.post(
   async (req, res, next) => {
     try {
       const { CommentId } = req.params;
-      const { id: UserId } = req.user; // Get user ID from authorized data
+      const { id: UserId, role } = req.user; // Get user ID from authorized data
 
       // Find the comment by ID
       const foundComment = await Comment.findByPk(CommentId);
@@ -326,7 +375,7 @@ commentsRouter.post(
 commentsRouter.delete("/:id/unlike", userAuth, async (req, res, next) => {
   try {
     const commentId = req.params.id;
-    const { id: userId } = req.user;
+    const { id: userId, role } = req.user;
 
     // Find the comment by ID
     const foundComment = await Comment.findByPk(commentId);
