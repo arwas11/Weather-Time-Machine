@@ -2,11 +2,6 @@ const request = require("supertest");
 // express app
 const app = require("./index");
 
-// express routes
-// const usersRouter = require("./routes/users");
-// const commentsRouter = require("./routes/comments");
-// const weatherDataRouter = require("./routes/weatherData");
-
 // db setup
 const { db } = require("./db/db");
 const { User, Comment, Like } = require("./models");

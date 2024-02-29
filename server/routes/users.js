@@ -18,15 +18,14 @@ usersRouter.get("/", userAuth, async (req, res, next) => {
     const foundUAdmin = await User.findOne({ where: { username: username } });
 
     if (foundUAdmin.role === "Admin") {
-    
-    const users = await User.findAll({ include: Comment });
-    if (!users || users.length === 0) {
-      return res.status(200).send(`No registered users`);
+      const users = await User.findAll({ include: Comment });
+      if (!users || users.length === 0) {
+        return res.status(200).send(`No registered users`);
+      }
+      res.status(202).send(users);
     }
-    res.status(202).send(users);
-  }
-  res.status(401).send("Error: Unauthorized");
-} catch (error) {
+    res.status(401).send("Error: Unauthorized");
+  } catch (error) {
     next(error);
   }
 });
@@ -84,12 +83,12 @@ usersRouter.get(
 usersRouter.get("/admin/login", basicAuth, async (req, res, next) => {
   try {
     const { username, password } = req.user;
-    
+
     //get admin info from db
     const foundAdmin = await User.findOne({
-      where: { username: username, },
+      where: { username: username },
     });
-    
+
     if (!foundAdmin) {
       return res.status(404).json({ error: "admin not found" });
     }

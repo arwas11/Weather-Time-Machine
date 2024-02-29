@@ -3,25 +3,27 @@
 Weather Time Machine server-side is a RESTful API that was built using Node.js, Express.js, Sqlite, Sequelize.
 
 The server extends the functionality of the Weather Time Machine front-end by adding and executing the following features:
+
 - User register & login
-- Authentication with JWT tokens & Role-Based Access Control (RBAC) 
+- Authentication with JWT tokens & Role-Based Access Control (RBAC)
 - Data Security and Encryption
 
 ## Project Deployment
 
 This app will be deployed on Render. The link to the deployed will be add soon.
 
-
 ## Installation
 
 1 - Fork or directly clone this current branch, "backend-module", to your local machine using your IDE terminal (I use VS Code).
 
 2 - Use the Node package manager [npm](https://www.npmjs.com/) to install Weather Time Machine's dependencies by using this command:
+
 ```bash
 npm install
 ```
 
 3 - to run the server side only, use the following command:
+
 ```bash
 npm run server-dev
 ```
@@ -32,7 +34,7 @@ npm run server-dev
 
 ## API Testing
 
-The API endpoints were tested with Postman. Mock tests will be added in the feature. 
+The API endpoints were tested with Postman. Mock tests will be added in the feature.
 
 ## Contributing
 

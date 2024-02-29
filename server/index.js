@@ -25,12 +25,12 @@ app.use("/users", usersRouter);
 app.use("/comments", commentsRouter);
 // app.use("/weatherData", weatherDataRouter);
 
-// // 404 handler
-// app.use((req, res) => {
-//   res.status(404).send({
-//     error: "404 - Not Found",
-//     message: "No route found for the requested URL",
-//   });
-// });
+// 404 handler
+app.use((req, res) => {
+  res.status(404).send({
+    error: "404 - Not Found",
+    message: "No route found for the requested URL",
+  });
+});
 
 module.exports = app;
