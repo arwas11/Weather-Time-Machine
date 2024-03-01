@@ -45,7 +45,7 @@ The API endpoints covered in the previous section execute the following role-bas
 
 - As a User
 
-  - Log in
+  - Login
   - Post/Edit/Delete associated comment
   - Like and remove a like from a comment
   - Delete account (to be added)
@@ -53,8 +53,8 @@ The API endpoints covered in the previous section execute the following role-bas
   - Remove from saved list (to be added)
   - Search data in saved list (to be added)
 
-- As a Admin 
-  - Log in
+- As an Admin 
+  - Login
   - Get all user's data
   - Post/Edit/Delete users' comments
   - Like and remove a like from users' comment (to be add)
