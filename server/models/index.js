@@ -18,13 +18,6 @@ Like.belongsTo(User);
 // every user has/posts many likes
 User.hasMany(Like);
 
-// // WeatherData added to users saved list
-// WeatherData.belongsTo(User)
-// // user saves many weather data
-// User.hasMany(WeatherData, {
-//   foreignKey: 'userId' // Assuming this is the actual foreign key
-// })
-
 module.exports = {
   User,
   Comment,

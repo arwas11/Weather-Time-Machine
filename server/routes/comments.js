@@ -24,8 +24,9 @@ commentsRouter.get("/", async (req, res, next) => {
 
     if (!comments || comments.length === 0) {
       // make status 204 which is for no content?? that will not show res message
-      res.status(200).send(`No Comments Were Posted Yet`); // No Content (204) for no comments
+      res.status(204).send(`No Comments Were Posted Yet`); // No Content (204) for no comments
     }
+    
     //The ?. operator is called the optional chaining operator. It allows you to access a property of an object without having to check if the object is null or undefined first. If the object is null or undefined, the ?. operator will return undefined instead of throwing an error.
     const mappedComments = comments.map((comment) => ({
       username: comment.User.username,
@@ -81,7 +82,6 @@ commentsRouter.get("/my-comments", userAuth, async (req, res, next) => {
     if (!comments || comments.length === 0) {
       return res.status(201).send(`You have not posted comments.`);
     }
-    // console.log(foundUser);
     const mappedComments = comments.map((comment) => ({
       id: comment.id,
       text: comment.text,
@@ -122,7 +122,6 @@ commentsRouter.post(
             .status(404)
             .json({ error: "Please log in to add a new comment" });
         }
-        console.log("=== POST comment user info", foundUser);
 
         // create & associate comment
         // const newComment = await foundUser.addComment({ text: newText });
@@ -132,13 +131,6 @@ commentsRouter.post(
         const addedCommentToUser = await foundUser.addComment(newComment0);
 
         const userAllComments = await foundUser.getComments();
-
-        // console.log("+++this is the created comment ", newComment0);
-
-        console.log(
-          "+++this is the user all comments'+++++",
-          await userAllComments
-        );
 
         res.status(201).send(`You successfully added a new comment!
       "${newComment0.text}"
@@ -223,7 +215,7 @@ commentsRouter.delete("/:commentId", userAuth, async (req, res, next) => {
     if (foundUAdmin.role === "Admin") {
       //find and verify the comment that matches the req.param
       const comment = await Comment.findOne(
-        { where: { id: commentIdParam } },
+        { where: { id: commentId } },
         {
           include: [
             {
@@ -244,7 +236,6 @@ commentsRouter.delete("/:commentId", userAuth, async (req, res, next) => {
 
       // find and verify the comment has a like or not
       const findLike = await Like.findAll({ Where: { CommentId: comment.id } });
-      // console.log("this getLikes results", findLike);
 
       if (findLike.CommentId === comment.id) {
         await findLike.destroy();
@@ -257,7 +248,7 @@ commentsRouter.delete("/:commentId", userAuth, async (req, res, next) => {
     }
     //find and verify the comment that matches the req.param
     const comment = await Comment.findOne(
-      { where: { id: commentIdParam } },
+      { where: { id: commentId } },
       {
         include: [
           {
@@ -293,7 +284,6 @@ commentsRouter.delete("/:commentId", userAuth, async (req, res, next) => {
 
     // find and verify the comment has a like or not
     const findLike = await Like.findAll({ Where: { CommentId: comment.id } });
-    // console.log("this getLikes results", findLike);
 
     if (findLike.CommentId === comment.id) {
       await findLike.destroy();
@@ -333,11 +323,11 @@ commentsRouter.delete("/:commentId", userAuth, async (req, res, next) => {
 
 //POST add like
 commentsRouter.post(
-  "/:CommentId/like",
+  "/:commentId/like",
   userAuth, // Middleware for user authentication
   async (req, res, next) => {
     try {
-      const { CommentId } = req.params;
+      const { commentId: CommentId } = req.params;
       const { id: UserId, role } = req.user; // Get user ID from authorized data
 
       // Find the comment by ID
@@ -345,13 +335,11 @@ commentsRouter.post(
       if (!foundComment) {
         return res.status(404).json({ error: "Comment not found" });
       }
-      // console.log('++++++this is found comment to like', foundComment);
 
       // Check if the user already liked this comment
       const existingLike = await Like.findOne({
         where: { CommentId, UserId },
       });
-      console.log("++++++this comment already liked", existingLike);
 
       if (existingLike) {
         return res.status(400).send("You already liked this comment");
@@ -359,7 +347,6 @@ commentsRouter.post(
 
       // Create a new Like associated with the user and comment
       const newLike = await Like.create({ CommentId, UserId });
-      console.log("++++++this comment getting liked", newLike);
 
       // Respond with success message
       res.status(201)

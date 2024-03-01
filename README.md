@@ -1,20 +1,20 @@
-# Weather Time Machine's Server-Side
+# Weather Time Machine API
 
-Weather Time Machine server-side is a RESTful API that was built using Node.js, Express.js, Sqlite, Sequelize.
+Weather Time Machine RESTful API was built using Node.js, Express.js, Sqlite, Sequelize.
 
-The server extends the functionality of the Weather Time Machine front-end by adding and executing the following features:
+The server extends the functionality of the Weather Time Machine front-end by implementing the following:
 
 - User register & login
 - Authentication with JWT tokens & Role-Based Access Control (RBAC)
 - Data Security and Encryption
 
-## Project Deployment
+<!-- ## Project Deployment
 
-This app will be deployed on Render. The link to the deployed will be add soon.
+This app will be deployed on Render. The link to the deployed will be add soon. -->
 
 ## Installation
 
-1 - Fork or directly clone this current branch, "backend-module", to your local machine using your IDE terminal (I use VS Code).
+1 - Fork or directly clone this branch, "backend-module", to your local machine using your IDE terminal (I use VS Code).
 
 2 - Use the Node package manager [npm](https://www.npmjs.com/) to install Weather Time Machine's dependencies by using this command:
 
@@ -32,9 +32,38 @@ npm run server-dev
 
 [Postman Documentation](https://documenter.getpostman.com/view/30497146/2sA2rGvesJ)
 
+## Usage
+
+The API endpoints covered in the previous section execute the following role-based features:
+
+- As a Visitor
+
+  - Read all comments
+  - Register & log in
+  - Submit a feedback (to be added)
+
+- As a User
+
+  - Log in
+  - Post/Edit/Delete associated comment
+  - Like and remove a like from a comment
+  - Delete account (to be added)
+  - Add searched data to a saved list (to be added)
+  - Remove from saved list (to be added)
+  - Search data in saved list (to be added)
+
+- As a Admin 
+  - Log in
+  - Get all user's data
+  - Post/Edit/Delete users' comments
+  - Like and remove a like from users' comment (to be add)
+  - Delete any entity (to be added)
+
 ## API Testing
 
-The API endpoints were tested with Postman. Mock tests will be added in the feature.
+The API endpoints were tested with Postman.
+
+Unit tests will be added in the feature.
 
 ## Contributing
 

@@ -122,52 +122,6 @@ usersRouter.get("/admin/login", basicAuth, async (req, res, next) => {
   }
 });
 
-// LOGOUT
-// delete token to apply
-// usersRouter.get("/logout", [
-//   // check("username").notEmpty().trim().isString(),
-//   // check("password").not().isEmpty().isString(),
-//   userAuth,
-// ],async (req, res, next) => {
-//   const {username, password} = req.user;
-//   try {
-//         //get user info from db
-//     const foundUser = await User.findOne({ where: { username: username } });
-
-//     if (!foundUser) {
-//       return res.status(404).json({ error: "User not found" });
-//     }
-
-//     // compare the provided password with the hashed password from the db
-//     const comparePassword = await bcrypt.compare(
-//       password,
-//       foundUser.password
-//     );
-
-//     if (!comparePassword) {
-//       return res.status(401).json({ error: "Incorrect password" });
-//     } else {
-//        // USER STORY: The user provides their username and password to authenticate and receives a token in exchange
-//       //make a payload
-//       const payload = { id: foundUser.id, username: foundUser.username};
-
-//       // sign and encode the payload to create the token
-//       const accessToken = jwt.sign(payload, JWT_SECRET, {expiresIn: "24h"});
-
-//       // don't send back the hashed password
-//       // res.json({ id: foundUser.id, email: foundUser.email });
-
-//       // res.json({accessToken})
-//       res.status(202).send(`welcome back, ${foundUser.username}!
-//       TOKEN: ${accessToken}`);
-//     }
-
-//     res.json(foundUser);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-
 // POST create new user account
 // User
 usersRouter.post("/register", basicAuth, async (req, res, next) => {
@@ -182,7 +136,6 @@ usersRouter.post("/register", basicAuth, async (req, res, next) => {
       username,
       password: hashedPassword,
     });
-    console.log("this is the added user ", newUser);
     res
       .status(201)
       .send(
@@ -202,7 +155,6 @@ usersRouter.post(
     try {
       // get the user data from basicAuth middleware
       const { username, password } = req.user;
-      // console.log(req.user);
 
       const role = req.body.role;
 
@@ -227,7 +179,7 @@ usersRouter.post(
         password: hashedPassword,
         role,
       });
-      console.log("this is the added admin ", newAdmin);
+
       res
         .status(201)
         .send(
@@ -238,54 +190,5 @@ usersRouter.post(
     }
   }
 );
-
-// PUT update username
-// ADD PASSWORD LATER
-// usersRouter.put(
-//   "/:username",
-//     userAuth,
-//   async (req, res, next) => {
-//     const newUsername = req.body.text;
-//     const { id, username } = req.user;
-//     try {
-//       //update username
-//       const foundUser = await User.findByPk({ where: { id: id } });
-//       if (newUsername !== foundUser.username) {
-//         const updatedUser = await foundUser.update({username: newUsername});
-//         res
-//           .status(201)
-//           .send(`Successfully updated username to ${updatedUser.username} `);
-//       }
-
-//       //update password
-//       // if (password !== foundUser.password){
-//       //   await User.update(req.body, {
-//       //     where: { username: username },
-//       //   });
-//       // }
-
-//     } catch (err) {
-//       next(err);
-//     }
-//   }
-// );
-
-// DELETE user by username
-//only Admin or User
-// usersRouter.delete("/delete-my-account", userAuth, async (req, res, next) => {
-//   try {
-//     const { id, username } = req.user;
-//     const foundUser = await User.findByPk({ where: { id: id } });
-//     await foundUser.destroy();
-//     res
-//       .status(201)
-//       .send(
-//         `You permanently deleted account with username "${foundUser.username}"
-//         Sorry to see you go!`
-//       );
-//   } catch (err) {
-//     next(err);
-//   }
-// });
 
 module.exports = usersRouter;

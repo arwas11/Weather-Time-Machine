@@ -17,7 +17,7 @@ async function userAuth(req, res, next) {
   try {
     const payload = jwt.verify(accessToken, JWT_SECRET);
     req.user = payload;
-    console.log('===this is user info in payload', payload);
+
     next();
   } catch (error) {
     res.status(403).json({ error: "Invalid token" });
