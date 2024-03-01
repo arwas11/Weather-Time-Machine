@@ -1,12 +1,13 @@
 # Weather Time Machine API
 
-Weather Time Machine RESTful API was built using Node.js, Express.js, Sqlite, Sequelize.
+Weather Time Machine RESTful API was built using Node.js, Express.js, Sqlite, Sequelize. The API complements the front-end by implementing a social interaction feature where users can share their thoughts about the weather data by posing comments and adding likes to other users' comments. 
 
 The server extends the functionality of the Weather Time Machine front-end by implementing the following:
 
 - User register & login
 - Authentication with JWT tokens & Role-Based Access Control (RBAC)
 - Data Security and Encryption
+
 
 <!-- ## Project Deployment
 
