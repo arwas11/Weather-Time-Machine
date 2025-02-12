@@ -9,13 +9,10 @@ This is a full-stack version to a front-end app that I originally built using Re
 
 ## Project Deployment
 
-This app will be deployed on Render. The link to the deployed will be add soon.
+This app will be deployed on Render.
 
 
 ## Project Screenshots
-Website:
-
-![Weather Time Machine website](https://github.com/arwas11/Weather-App/assets/146148342/d529ea71-2128-406b-8edd-23e3d096d4e8)
 
 Wireframe:
 
