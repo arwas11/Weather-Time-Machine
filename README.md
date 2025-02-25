@@ -1,10 +1,10 @@
-# Weather Time Machine 
+# Weather Time Machine 0.2
 
 Weather Time Machine is a TypeScript/JavaScript weather app that explores past and present weather conditions in a given city. 
 
 This app was built using Angular and Typescript for the client-side and Node.js, Express.js, Sqlite, Sequelize for the server-side. It also utilizes Bootstrap for styling.
 
-This is a full-stack version to a front-end app that I originally built using React. My goal behind building this app is to evoke a sense of exploration and discovery through the app and show how climate change has been affecting our planet.
+This is a full-stack version to a front-end app that I originally built using React, [Weather Time Machine 0.1](https://github.com/arwas11/Weather-Time-Machine0.1). My goal behind building this app is to evoke a sense of exploration and discovery through the app and show how climate change has been affecting our planet.
 
 
 ## Project Deployment
